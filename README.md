@@ -7,7 +7,13 @@
 
 <!-- badges: end -->
 
-The goal of laundRy is to …
+The `laundRy` package performs many standard preprocessing techniques
+for Pandas dataframes, before use in statistical analysis and machine
+learning. The package functionality includes categorizing column types,
+handling missing data and imputation, transforming/standardizing columns
+and feature selection. The `laundRy` package aims to remove much of the
+grunt work in the typical data science workflow, allowing the analyst
+maximum time and energy to devote to modelling\!
 
 ## Installation
 
@@ -25,7 +31,57 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("UBC-MDS/laundRy")
 ```
 
+### Features
+
+  - `categorize`: This function will take in a dataframe, and output a
+    list of lists with column types as list labels (numerical,
+    categorical, text), and each list containing the column names
+    associated with each column type.
+
+  - `fill_missing`: This function takes in a dataframe and depending on
+    user input, will either remove all rows with missing values, or will
+    fill missing values using `mean`, `median`, or `regression`
+    imputation.
+
+  - `transform_columns`: This function will take in a dataframe and
+    apply pre-processing techniques to each column. Categorical columns
+    will be transformed with a One Hot Encoding, numerical columns will
+    be scaled, and text columns will be transformed with a Count
+    Vectorizer.
+
+  - `feature_selector`: This function takes in a dataframe which has X
+    and y columns specified, a target task (Regression or
+    Classification), and a maximum number of features to select. The
+    function returns the most important features for the target task.
+
+## Dependencies
+
+  - TO DO
+
+## Usage
+
+  - TODO
+
+### LaundRy in the R ecosystem
+
+  - [mice](https://cran.r-project.org/web/packages/mice/mice.pdf) offers
+    similar functionality for the fill\_missing function, but is not
+    integrated with a column categorizer.
+
+  - The main feature selection and preprocessing package in R is
+    [caret](https://cran.r-project.org/web/packages/caret/caret.pdf),
+    which carries out similar functionality to our `feature_selector`
+    function though laundRy makes the workflow more efficient and adds
+    imputation.
+
+  - As far as we know, there are no similar packages for Categorizing
+    Columns and providing a list of the categorized columns. `pyLaundry`
+    is the first package we are aware of to abstract away the full
+    dataframe pre-processing workflow with a unified and simple API.
+
 ## Example
+
+  - TO DO
 
 This is a basic example which shows you how to solve a common problem:
 
@@ -33,27 +89,3 @@ This is a basic example which shows you how to solve a common problem:
 library(laundRy)
 ## basic example code
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub\!
