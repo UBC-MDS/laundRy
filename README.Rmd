@@ -57,7 +57,7 @@ devtools::install_github("UBC-MDS/laundRy")
 
 - The main feature selection and preprocessing package in R is [caret](https://cran.r-project.org/web/packages/caret/caret.pdf), which carries out similar functionality to our `feature_selector` function though laundRy makes the workflow more efficient and adds imputation.
 
-- As far as we know, there are no similar packages for Categorizing Columns and providing a list of the categorized columns. `pyLaundry` is the first package we are aware of to abstract away the full dataframe pre-processing workflow with a unified and simple API.
+- As far as we know, there are no similar packages for Categorizing Columns and providing a list of the categorized columns. `laundRy` is the first package we are aware of to abstract away the full dataframe pre-processing workflow with a unified and simple API.
 
 ## Example
 
