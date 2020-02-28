@@ -13,17 +13,19 @@ fill_missing(df, num_list, cat_list, num_imp, cat_imp)
 
 \item{cat_list}{list of columns to have categorical imputation applied}
 
-\item{num_imp}{method for numerical imputation (default = "mean")}
+\item{num_imp}{method for numerical imputation}
 
-\item{cat_imp}{method for categorical imputation (default = "mode")}
+\item{cat_imp}{method for categorical imputation}
 }
 \value{
 df, with missing values replaced by the specified method
 }
 \description{
-Handles missing values in a dataframe
+Replace missing values in dataframe columns by the specified methods. 
+Separate methods can be applied for categorical column imputation and 
+numerical column imputation.
 }
 \examples{
-fill_missing(df, list('weight'), list('education'))
+fill_missing(df, list('weight'), list('education'), 'mean', 'mode')
 
 }
