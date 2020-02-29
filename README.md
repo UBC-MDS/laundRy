@@ -8,7 +8,7 @@
 <!-- badges: end -->
 
 The `laundRy` package performs many standard preprocessing techniques
-for Pandas dataframes, before use in statistical analysis and machine
+for Tidyverse tibbles, before use in statistical analysis and machine
 learning. The package functionality includes categorizing column types,
 handling missing data and imputation, transforming/standardizing columns
 and feature selection. The `laundRy` package aims to remove much of the
@@ -75,7 +75,7 @@ devtools::install_github("UBC-MDS/laundRy")
     imputation.
 
   - As far as we know, there are no similar packages for Categorizing
-    Columns and providing a list of the categorized columns. `pyLaundry`
+    Columns and providing a list of the categorized columns. `laundRy`
     is the first package we are aware of to abstract away the full
     dataframe pre-processing workflow with a unified and simple API.
 
