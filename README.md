@@ -45,9 +45,8 @@ devtools::install_github("UBC-MDS/laundRy")
 
   - `transform_columns`: This function will take in a dataframe and
     apply pre-processing techniques to each column. Categorical columns
-    will be transformed with a One Hot Encoding, numerical columns will
-    be scaled, and text columns will be transformed with a Count
-    Vectorizer.
+    will be transformed with a One Hot Encoding and numerical columns
+    will be scaled.
 
   - `feature_selector`: This function takes in a dataframe which has X
     and y columns specified, a target task (Regression or
