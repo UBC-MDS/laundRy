@@ -39,7 +39,7 @@ devtools::install_github("UBC-MDS/laundRy")
 
 - `fill_missing`: This function takes in a dataframe and depending on user input, will either remove all rows with missing values, or will fill missing values using `mean`, `median`, or `regression` imputation. 
 
--  `transform_columns`: This function will take in a dataframe and apply pre-processing techniques to each column. Categorical columns will be transformed with a One Hot Encoding, numerical columns will be scaled, and text columns will be transformed with a Count Vectorizer. 
+-  `transform_columns`: This function will take in a dataframe and apply pre-processing techniques to each column. Categorical columns will be transformed with a One Hot Encoding and numerical columns will be scaled. 
 
 - `feature_selector`: This function takes in a dataframe which has X and y columns specified, a target task (Regression or Classification), and a maximum number of features to select. The function returns the most important features for the target task. 
 
