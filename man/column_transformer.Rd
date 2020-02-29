@@ -2,7 +2,7 @@
 % Please edit documentation in R/column_transformer.R
 \name{column_transformer}
 \alias{column_transformer}
-\title{Transforms categorical and numerical features}
+\title{Transforms columns of a dataframe}
 \usage{
 column_transformer(df, num_list, cat_list, num_trans, cat_trans)
 }
@@ -21,7 +21,9 @@ column_transformer(df, num_list, cat_list, num_trans, cat_trans)
 df, with tranformed column values
 }
 \description{
-Transforms categorical and numerical features
+Transforms  columns in dataframe  by the specified methods.
+Separate methods can be applied for categorical column transformation and
+numerical column transformation.
 }
 \examples{
 column_transformer(df, list('weight'), list('education'))

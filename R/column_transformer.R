@@ -1,4 +1,9 @@
-#' Transforms categorical and numerical features
+#' Transforms columns of a dataframe
+#'
+#' Transforms  columns in dataframe  by the specified methods.
+#' Separate methods can be applied for categorical column transformation and
+#' numerical column transformation.
+#'
 #'
 #' @param df dataframe to be transformed
 #' @param num_list list of columns to have numerical transformation   to be applied
