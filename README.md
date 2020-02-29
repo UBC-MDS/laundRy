@@ -17,14 +17,7 @@ maximum time and energy to devote to modelling\!
 
 ## Installation
 
-You can install the released version of laundRy from
-[CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("laundRy")
-```
-
-And the development version from [GitHub](https://github.com/) with:
+Install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
