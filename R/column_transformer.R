@@ -1,3 +1,7 @@
+# importing required libraries
+library(caret)
+library(tidyverse)
+
 #' Transforms columns of a dataframe
 #'
 #' Transforms  columns in dataframe  by the specified methods.
@@ -17,6 +21,14 @@
 #' column_transformer(df, list('weight'), list('education'))
 #'
 #' @export
+#'
 column_transformer <-
   function(df, num_list, cat_list, num_trans, cat_trans)
-  { }
+  {
+
+    preProcValues <- preProcess(df[,num_cols], method = c("center", "scale"))
+
+    training[,num_cols] = predict(preProcValues, training[,num_cols])
+    test[,num_cols] = predict(preProcValues, test[,num_cols])
+    head(training[,num_cols])
+    }
