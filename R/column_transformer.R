@@ -10,9 +10,9 @@ library(tidyverse)
 #'
 #'
 #' @param df dataframe to be transformed
-#' @param num_list list of columns to have numerical transformation   to be applied
-#' @param cat_list list of columns to have categorical transformations to be applied
-#' @param num_trans method for numerical transformation (default = "standard scaling")
+#' @param num_vec list of columns to have numerical transformation   to be applied
+#' @param cat_vec list of columns to have categorical transformations to be applied
+#' @param num_trans method for numerical transformation (default = "standard_scaling")
 #' @param cat_trans method for categorical transformation (default = "ohe")
 #'
 #' @return df, with tranformed column values
@@ -23,12 +23,30 @@ library(tidyverse)
 #' @export
 #'
 column_transformer <-
-  function(df, num_list, cat_list, num_trans, cat_trans)
+  function(df, num_vec, cat_vec, num_trans, cat_trans)
   {
 
-    preProcValues <- preProcess(df[,num_cols], method = c("center", "scale"))
+    # numeric column transformation
 
-    training[,num_cols] = predict(preProcValues, training[,num_cols])
-    test[,num_cols] = predict(preProcValues, test[,num_cols])
-    head(training[,num_cols])
+    if(num_trans == "standard_scaling"){
+      preProcValues = preProcess(df[,num_vec], method = c("center", "scale"))
+
+    }
+    if(num_trans == "minmax_Scaling"){
+      preProcValues = preProcess(df[,num_vec], method = "range")
+
+    }
+    else{
+      print("Invalid transformation type for numerical columns")
+    }
+
+    df[,num_vec] = predict(preProcValues, df[,num_vec])
+
+
+    # transformation for categorical columns
+    if(cat_trans == 'onehot'){
+      dmy <- dummyVars(" ~ .", data = df[,cat_vec], fullRank  = TRUE)
+    }
+
+
     }
