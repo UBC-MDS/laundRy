@@ -53,10 +53,26 @@ column_transformer <-
     # block to ensure consistency in naming convention
     x_train = x_train
     x_test = x_test
+
+
+    # checking for incorrect inputs
+    if(class(x_train) != 'data.frame'| class(x_test)!= 'data.frame' )
+      stop("Input objects x_train and x_test must be of class dataframe")
+
+    if(class(col_names) != 'list'){
+      stop("Parameter col_names must be a  list of named vectors specifying numeric and categoric columns")
+    }
+
+    if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling"){
+      stop("num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
+    }
+
+    if(cat_trans != "onehot_encoding" & cat_trans != "label_encoding")
+      stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
+
+    # block to ensure consistency in naming convention
     num_cols = col_names$num_cols
     cat_cols = col_names$cat_cols
-
-
 
 
     # numeric column transformation
@@ -72,10 +88,7 @@ column_transformer <-
       x_train[,num_cols] = predict(preProcValues, x_train[,num_cols])
       x_test[,num_cols] = predict(preProcValues, x_test[,num_cols])
 
-    }else{
-      print("Invalid transformation type for numerical columns")
     }
-
 
 
     # transformation for categorical columns
@@ -104,13 +117,9 @@ column_transformer <-
           x_test[[col]]<- as.integer(factor(x_test[[col]], levels = levels))
         }
     }
-    else{
-      print("Invalid input for categorical transformation")
-    }
 
     return(list (x_train = x_train,x_test = x_test))
 
 
-      }
-
+  }
 
