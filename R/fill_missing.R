@@ -53,6 +53,28 @@ fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
         stop("categorical imputation method can only be mode")
     
     # Imputation methods for numerical columns
+    for (type in column_list){
+        for (column in type){
+            if (num_imp == "mean"){
+                col_imp = train_df$column %>% mean()
+            }
+        }    
+    }
+        # get column mean or median
+        if num_trans == "mean":
+            col_imp = train_df[column].mean()
+        if num_trans == "median":
+            col_imp = train_df[column].median()
+            
+        # Get index of NaN values in train columns
+        # Todo: If these are empty (no Nan) is that fine
+        index_train = train_df[column].index[train_df[column].apply(np.isnan)]
+        index_test = test_df[column].index[test_df[column].apply(np.isnan)]
+        
+        # Use impute value on train set
+        train_df.loc[index_train,column] = col_imp
+        # Use same impute value on test set
+        test_df.loc[index_test,column] = col_imp
     
     
   }
