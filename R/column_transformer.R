@@ -1,9 +1,3 @@
-# importing required libraries
-#library(caret)
-
-
-
-
 #' Transforms columns of a dataframe
 #'
 #' Transforms  columns in dataframe  by the specified methods.
@@ -19,8 +13,6 @@
 #'
 #' @return list(x_train,x_test) transformed
 #'
-#' @examples
-#' column_transformer(x_train, list('weight'), list('education'))
 #'
 #' @export
 #'
@@ -49,44 +41,44 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
     stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
 
   # block to ensure consistency in naming convention
-  num_cols = col_names$num_cols
-  cat_cols = col_names$cat_cols
+  numeric = col_names$numeric
+  categorical = col_names$categorical
 
 
   # numeric column transformation
 
   if(num_trans == "standard_scaling"){
-    preProcValues <- caret::preProcess(x_train[,num_cols], method = c("center", "scale"))
-    x_train[,num_cols] = predict(preProcValues, x_train[,num_cols])
-    x_test[,num_cols] = predict(preProcValues, x_test[,num_cols])
+    preProcValues <- caret::preProcess(x_train[,numeric], method = c("center", "scale"))
+    x_train[,numeric] = stats::predict(preProcValues, x_train[,numeric])
+    x_test[,numeric] = stats::predict(preProcValues, x_test[,numeric])
 
 
   }else if(num_trans == "minmax_scaling"){
-    preProcValues = caret::preProcess(x_train[,num_cols], method = "range")
-    x_train[,num_cols] = predict(preProcValues, x_train[,num_cols])
-    x_test[,num_cols] = predict(preProcValues, x_test[,num_cols])
+    preProcValues = caret::preProcess(x_train[,numeric], method = "range")
+    x_train[,numeric] = stats::predict(preProcValues, x_train[,numeric])
+    x_test[,numeric] = stats::predict(preProcValues, x_test[,numeric])
 
   }
 
 
   # transformation for categorical columns
   if(cat_trans == 'onehot_encoding'){
-    x_train_cat <- x_train[, cat_cols]
-    x_test_cat <- x_test[, cat_cols]
-    x_train <- x_train[ , !(names(x_train) %in% cat_cols)]
-    x_test <- x_test[ , !(names(x_test) %in% cat_cols)]
+    x_train_cat <- x_train[, categorical]
+    x_test_cat <- x_test[, categorical]
+    x_train <- x_train[ , !(names(x_train) %in% categorical)]
+    x_test <- x_test[ , !(names(x_test) %in% categorical)]
 
     dmy <- caret::dummyVars(" ~ .", data = x_train_cat, fullRank  = TRUE)
-    x_train_cat <- data.frame(predict(dmy, newdata = x_train_cat))
+    x_train_cat <- data.frame(stats::predict(dmy, newdata = x_train_cat))
 
-    x_test_cat <- data.frame(predict(dmy, newdata = x_test_cat))
+    x_test_cat <- data.frame(stats::predict(dmy, newdata = x_test_cat))
 
     x_train <- cbind(x_train, x_train_cat )
     x_test <- cbind(x_test, x_test_cat)
 
   }
   else if(cat_trans=='label_encoding'){
-    for (col in cat_cols) {
+    for (col in categorical) {
 
       x_train[[col]] = as.character(x_train[[col]])
       x_test[[col]] = as.character(x_test[[col]])

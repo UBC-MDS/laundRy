@@ -17,7 +17,7 @@ sex <- c('M', 'F','M', 'F','M', 'F')
 daily_wage<- c( 80, 140, 320,60, 90, 90)
 x_test <- data.frame(employee_name, manager, age, sex, daily_wage)
 
-col_names <- list(cat_cols= c("manager", "sex"), num_cols = c("age", "daily_wage" ))
+col_names <- list(categorical= c("manager", "sex"), numeric = c("age", "daily_wage" ))
 
 
 # testing bad inputs for the arguments from user
