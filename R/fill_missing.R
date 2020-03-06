@@ -8,7 +8,7 @@ getmode <- function(v) {
 #' Separate methods can be applied for categorical column imputation and
 #' numerical column imputation.
 #'
-#' @param df_train training set dataframe to be transformed
+#' @param x_train training set dataframe to be transformed
 #' @param df_test test set dataframe to be transformed
 #' @param column_list named list of columns with two sub vectors, must be named
 #' 'numeric' and 'categorical'
