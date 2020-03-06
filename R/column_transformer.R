@@ -9,7 +9,7 @@
 #' @param x_test test set dataframe/tibble
 #' @param column_list  named list of categorical and numeric columns. 
 #' @param num_trans method(character) for numerical transformation (default = "standard_scaling")
-#' @param cat_trans method(character) for categorical transformation (default = "ohe")
+#' @param cat_trans method(character) for categorical transformation (default = "onehot_encoding")
 #'
 #' @return list(x_train,x_test) transformed
 #'
