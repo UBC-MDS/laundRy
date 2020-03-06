@@ -17,7 +17,7 @@
 
 library(caret)
 feature_selection <- function(X,y,mode,n_features) {
-
+  #Checking for dataframe
   if (class(X) != "data.frame"){
     stop("Input Data is not Data Frame")
   }
@@ -25,13 +25,13 @@ feature_selection <- function(X,y,mode,n_features) {
 
   if (mode == "regression") {
 
-    control <- rfeControl(functions = lmFuncs,
+    control <- caret::rfeControl(functions = lmFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
                           verbose = FALSE, #prevents copious amounts of output from being produced.
     )
 
-    lm_m <- rfe(X,
+    lm_m <- caret::rfe(X,
                 y,
                 sizes = c(1:ncol(X)),
                 rfeControl = control)
