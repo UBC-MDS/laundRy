@@ -14,7 +14,7 @@ list
 }
 \description{
 Denote each dataframe category as numeric, categorical, or text
-and return a list of lists labeled 'numeric', 
+and return a list of lists labeled 'numeric',
 'categorical' and 'text' containing column names
 that fall into each category
 }

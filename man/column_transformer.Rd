@@ -4,28 +4,30 @@
 \alias{column_transformer}
 \title{Transforms columns of a dataframe}
 \usage{
-column_transformer(df, num_list, cat_list, num_trans, cat_trans)
+column_transformer(
+  x_train,
+  x_test,
+  col_names,
+  num_trans = "standard_scaling",
+  cat_trans = "onehot_encoding"
+)
 }
 \arguments{
-\item{df}{dataframe to be transformed}
+\item{x_train}{trainingset dataframe/tibble}
 
-\item{num_list}{list of columns to have numerical transformation   to be applied}
+\item{x_test}{test set dataframe/tibble}
 
-\item{cat_list}{list of columns to have categorical transformations to be applied}
+\item{col_names}{list of names of categorical columns}
 
-\item{num_trans}{method for numerical transformation (default = "standard scaling")}
+\item{num_trans}{method(character) for numerical transformation (default = "standard_scaling")}
 
-\item{cat_trans}{method for categorical transformation (default = "ohe")}
+\item{cat_trans}{method(character) for categorical transformation (default = "ohe")}
 }
 \value{
-df, with tranformed column values
+list(x_train,x_test) transformed
 }
 \description{
 Transforms  columns in dataframe  by the specified methods.
 Separate methods can be applied for categorical column transformation and
 numerical column transformation.
-}
-\examples{
-column_transformer(df, list('weight'), list('education'))
-
 }

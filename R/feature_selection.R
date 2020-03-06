@@ -15,5 +15,5 @@
 #' @examples
 #' feature_selection(data.frame(X1 = c(2,4,3), X2 = c('c','d','c')),c(4,3,5),"regression",2)
 feature_selection <- function(X,y,mode,n_features) {
-  pass
+
 }
