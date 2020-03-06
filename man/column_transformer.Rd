@@ -7,7 +7,7 @@
 column_transformer(
   x_train,
   x_test,
-  col_names,
+  column_list,
   num_trans = "standard_scaling",
   cat_trans = "onehot_encoding"
 )
@@ -17,11 +17,11 @@ column_transformer(
 
 \item{x_test}{test set dataframe/tibble}
 
-\item{col_names}{list of names of categorical columns}
+\item{column_list}{named list of categorical and numeric columns.}
 
 \item{num_trans}{method(character) for numerical transformation (default = "standard_scaling")}
 
-\item{cat_trans}{method(character) for categorical transformation (default = "ohe")}
+\item{cat_trans}{method(character) for categorical transformation (default = "onehot_encoding")}
 }
 \value{
 list(x_train,x_test) transformed

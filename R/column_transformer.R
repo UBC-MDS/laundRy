@@ -7,7 +7,7 @@
 #'
 #' @param x_train trainingset dataframe/tibble
 #' @param x_test test set dataframe/tibble
-#' @param column_list  named list of categorical and numeric columns. 
+#' @param column_list  named list of categorical and numeric columns.
 #' @param num_trans method(character) for numerical transformation (default = "standard_scaling")
 #' @param cat_trans method(character) for categorical transformation (default = "onehot_encoding")
 #'
@@ -17,7 +17,7 @@
 #' @export
 #'
 
-column_transformer <- function(x_train,x_test, col_names, num_trans="standard_scaling", cat_trans="onehot_encoding")
+column_transformer <- function(x_train,x_test, column_list, num_trans="standard_scaling", cat_trans="onehot_encoding")
 {
 
 
@@ -26,9 +26,8 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
   if(class(x_train) != 'data.frame'| class(x_test)!= 'data.frame' )
     stop("Input objects x_train and x_test must be of class dataframe")
 
-  if(class(col_names) != 'list' | length(col_names) != 2){
-    stop("Parameter col_names must be a  list of length 2 specifying named vectors specifying numeric and categoric columns")
-  }
+  if(class(column_list) != 'list' | length(column_list) != 2)
+    stop("Parameter column_list must be a  list of length 2 specifying named vectors specifying numeric and categoric columns")
 
   if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling")
     stop("num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
@@ -36,11 +35,30 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
   if(cat_trans != "onehot_encoding" & cat_trans != "label_encoding")
     stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
 # Check train set and test set columns are the same
-  if (!dplyr::all_equal(colnames(x_train), colnames(x_test)))
-    stop("Columns of train and test set must be identical.")
-  # block to ensure consistency in naming convention
-  numeric = col_names$numeric
-  categorical = col_names$categorical
+  for (cols in names(x_test)){
+    if(!is.element(cols, names(x_train)))
+      stop("Columns of train and test set must be identical")
+  }
+  for (cols in names(x_train)){
+    if(!is.element(cols, names(x_test)))
+      stop("Columns of train and test set must be identical")
+  }
+
+
+  # making sure column names present in dictionary are same as that of x_train
+  # code adapted from Alex's module
+
+  for (vect in names(column_list)){
+    for ( col in column_list[[vect]]){
+      if(!is.element(col, names(x_train)))
+        stop("Column names in the named list must be present in dataframe")
+    }
+  }
+
+
+
+  numeric = column_list$numeric
+  categorical = column_list$categorical
 
 
   # numeric column transformation
@@ -88,5 +106,7 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
 
   return(list (x_train = x_train, x_test = x_test))
 
-
 }
+
+
+

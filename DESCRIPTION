@@ -24,4 +24,5 @@ Suggests:
     testthat
 Imports: 
     stats,
-    caret
+    caret,
+    dplyr
