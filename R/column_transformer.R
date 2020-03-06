@@ -20,9 +20,6 @@
 column_transformer <- function(x_train,x_test, col_names, num_trans="standard_scaling", cat_trans="onehot_encoding")
 {
 
-  # block to ensure consistency in naming convention
-  x_train = x_train
-  x_test = x_test
 
 
   # checking for incorrect inputs
