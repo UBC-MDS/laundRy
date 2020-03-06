@@ -15,7 +15,7 @@ getmode <- function(v) {
 #' @param num_imp method for numerical imputation (default = "mean")
 #' @param cat_imp method for categorical imputation
 #'
-#' @return df, with missing values replaced by the specified method
+#' @return list, with missing values replaced by the specified method
 #' @importFrom magrittr %>%
 #' @import readr
 #' @import tidyr
