@@ -13,9 +13,10 @@
 #' categorize(data.frame(a = c(1.2,2.3), b = c('a','b','c')))
 categorize <- function(df, max_cat = 10) {
   # Check that inputs are valid
+  if(class(max_cat) != 'numeric') stop("Error: max_cat must be a positive integer")
   if(max_cat%%1 != 0 | max_cat < 1) stop("Error: max_cat must be a positive integer")
   if(class(df) != 'data.frame') stop("Error: Input for df must be of class data.frame")
-  if(class(max_cat) != 'numeric') stop("Error: max_cat must be a positive integer")
+
 
   # Track all columns and their types
   col_types <- sapply(df, class)
