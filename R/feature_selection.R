@@ -24,6 +24,8 @@ feature_selection <- function(X,y,mode,n_features) {
   }
 
 
+
+
   if (mode == "regression") {
 
     control <- caret::rfeControl(functions = lmFuncs,
@@ -41,14 +43,17 @@ feature_selection <- function(X,y,mode,n_features) {
 
 
   } else {
+    if (class(y) != "factor"){
+      stop("Input target is not factor")
+    }
 
-    control <- rfeControl(functions = lrFuncs,
+    control <- caret::rfeControl(functions = lrFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
                           verbose = FALSE, #prevents copious amounts of output from being produced.
     )
 
-    lr_m <- rfe(X,
+    lr_m <- caret::rfe(X,
                 y,
                 sizes = c(1:ncol(X)),
                 rfeControl = control)
