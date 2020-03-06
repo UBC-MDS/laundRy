@@ -35,7 +35,9 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
 
   if(cat_trans != "onehot_encoding" & cat_trans != "label_encoding")
     stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
-
+# Check train set and test set columns are the same
+  if (!dplyr::all_equal(colnames(x_train), colnames(x_test)))
+    stop("Columns of train and test set must be identical.")
   # block to ensure consistency in naming convention
   numeric = col_names$numeric
   categorical = col_names$categorical
