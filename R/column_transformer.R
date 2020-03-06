@@ -30,9 +30,8 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
     stop("Parameter col_names must be a  list of length 2 specifying named vectors specifying numeric and categoric columns")
   }
 
-  if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling"){
+  if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling")
     stop("num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
-  }
 
   if(cat_trans != "onehot_encoding" & cat_trans != "label_encoding")
     stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
