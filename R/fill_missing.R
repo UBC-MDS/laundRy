@@ -106,5 +106,5 @@ fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
                                        train_col_mode,
                                        !!rlang::sym(column)))
   }
-  list("train" = df_train,"test" = df_test)
+  list("x_train" = x_train,"x_test" = x_test)
 }
