@@ -22,7 +22,7 @@ getmode <- function(v) {
 #' @importFrom dplyr select
 #' @importFrom dplyr select
 #' @examples
-#' fill_missing(df, list('weight'), list('education'), 'mean', 'mode')
+#' fill_missing(df, list('weight'), list('education'), 'mean', 'mode') # UPDATE example??
 #'
 #' @export
 fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
