@@ -12,7 +12,7 @@ getmode <- function(v) {
 #' @param x_test test set dataframe to be transformed
 #' @param column_list named list of columns with two sub vectors, must be named
 #' 'numeric' and 'categorical'
-#' @param num_imp method for numerical imputation
+#' @param num_imp method for numerical imputation (default = "mean")
 #' @param cat_imp method for categorical imputation
 #'
 #' @return df, with missing values replaced by the specified method
