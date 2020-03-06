@@ -4,7 +4,7 @@
 \alias{categorize}
 \title{Categorize dataframe columns}
 \usage{
-categorize(df)
+categorize(df, max_cat = 10)
 }
 \arguments{
 \item{df}{data.frame}
