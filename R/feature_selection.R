@@ -17,6 +17,7 @@
 
 library(caret)
 feature_selection <- function(X,y,mode,n_features) {
+
   #Checking for dataframe
   if (class(X) != "data.frame"){
     stop("Input Data is not Data Frame")
@@ -62,5 +63,6 @@ feature_selection <- function(X,y,mode,n_features) {
   }
 
   return (tf)
+
 
 }
