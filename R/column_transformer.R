@@ -7,7 +7,7 @@
 #'
 #' @param x_train trainingset dataframe/tibble
 #' @param x_test test set dataframe/tibble
-#' @param col_names list of names of categorical columns
+#' @param column_list  named list of categorical and numeric columns. 
 #' @param num_trans method(character) for numerical transformation (default = "standard_scaling")
 #' @param cat_trans method(character) for categorical transformation (default = "ohe")
 #'
@@ -92,4 +92,3 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
 
 
 }
-
