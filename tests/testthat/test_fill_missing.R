@@ -1,8 +1,8 @@
 context("fill_missing")
-# Generate data for test cases
-df_tr <- data.frame(x = c(4.0, 3.0, NA, 2.0), y = c(2, 2, NA, 1))
-df_te <- data.frame(x = c(1.0, 1.0, NA), y = c(1, NA, 1))
-list_input <- list("numeric" = c('x'), "categorical" = c('y'))
+
+source("helper_function_fill_missing.R")
+
+# This script tests the fill missing function
 
 test_that("Output length of fill_missing() is correct", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
@@ -55,6 +55,11 @@ test_that("Invalid input gives error", {
   expect_error(fill_missing(c(4,3,3), df_te, list_input, "median", "mode"), "Training set must be a dataframe.")
   expect_error(fill_missing(df_tr,c(4,3,3), list_input, "median", "mode"), "Test set must be a dataframe.")
   expect_error(fill_missing(df_tr, df_te, c(4,3,3), "median", "mode"), "num_list must be a named list of columns.")
+  expect_error(fill_missing(df_tr, df_te, list_input, 4, "mode"), "num_imp method must be a string.")
+  expect_error(fill_missing(df_tr, df_te, list_input, "median", 4), "cat_imp method must be a string.")
   expect_error(fill_missing(df_tr, df_te, list_input, "mode", "mode"), "numerical imputation method can only be mean or median")
   expect_error(fill_missing(df_tr, df_te, list_input, "median", "median"), "categorical imputation method can only be mode")
+  expect_error(fill_missing(df_tr, df_te, list_input_2, "median", "mode"), "Columns in named list must be in dataframe")
+  expect_error(fill_missing(df_tr_2, df_te_2, list_input_2, "median", "mode"), "Columns of train and test set must be identical.")
+  expect_error(fill_missing(df_tr_3, df_te, list_input, "median", "mode"), "Columns must have numeric data, encode categorical variables as integers")
 })

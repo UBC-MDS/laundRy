@@ -1,7 +1,11 @@
+#' Helper function to find mode of a column
+#' @param x a column
+#' @NoRd
 getmode <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]
 }
+
 #' Handles missing values in a dataframe
 #'
 #' Replace missing values in dataframe columns by the specified methods.
@@ -17,12 +21,8 @@ getmode <- function(v) {
 #'
 #' @return list, with missing values replaced by the specified method
 #' @importFrom magrittr %>%
-#' @import readr
-#' @import tidyr
-#' @importFrom dplyr select
-#' @importFrom dplyr select
 #' @examples
-#' fill_missing(df, list('weight'), list('education'), 'mean', 'mode') # UPDATE example??
+#' fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
 #'
 #' @export
 fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
@@ -40,7 +40,7 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
     stop("cat_imp method must be a string.")
 
   # Check train set and test set columns are the same
-  if (!dplyr::all_equal(colnames(x_train), colnames(x_test)))
+  if (!isTRUE(dplyr::all_equal(colnames(x_train), colnames(x_test))))
     stop("Columns of train and test set must be identical.")
 
   # Check column categories as well as
@@ -52,6 +52,10 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
         stop("Columns in named list must be in dataframe")
     }
   }
+
+  # Check that all columns have numeric data
+  if (!dim(x_train)[2]==dim(select_if(x_train, is.numeric))[2])
+      stop("Columns must have numeric data, encode categorical variables as integers")
 
   # Check that numerical imputation method is one of the two options
   if (num_imp != "mean" && num_imp != "median")
