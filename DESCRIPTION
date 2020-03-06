@@ -23,4 +23,6 @@ RoxygenNote: 7.0.2
 Suggests: 
     testthat
 Imports: 
-    caret
+    stats,
+    caret,
+    dplyr
