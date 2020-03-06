@@ -18,6 +18,10 @@
 library(caret)
 feature_selection <- function(X,y,mode,n_features) {
 
+  if (class(X) != "data.frame"){
+    stop("Input Data is not Data Frame")
+  }
+
 
   if (mode == "regression") {
 
