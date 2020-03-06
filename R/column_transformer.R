@@ -7,9 +7,9 @@
 #'
 #' @param x_train trainingset dataframe/tibble
 #' @param x_test test set dataframe/tibble
-#' @param col_names list of names of categorical columns
+#' @param column_list  named list of categorical and numeric columns. 
 #' @param num_trans method(character) for numerical transformation (default = "standard_scaling")
-#' @param cat_trans method(character) for categorical transformation (default = "ohe")
+#' @param cat_trans method(character) for categorical transformation (default = "onehot_encoding")
 #'
 #' @return list(x_train,x_test) transformed
 #'
@@ -20,9 +20,6 @@
 column_transformer <- function(x_train,x_test, col_names, num_trans="standard_scaling", cat_trans="onehot_encoding")
 {
 
-  # block to ensure consistency in naming convention
-  x_train = x_train
-  x_test = x_test
 
 
   # checking for incorrect inputs
@@ -33,13 +30,14 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
     stop("Parameter col_names must be a  list of length 2 specifying named vectors specifying numeric and categoric columns")
   }
 
-  if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling"){
+  if(num_trans != "standard_scaling" & num_trans!= "minmax_scaling")
     stop("num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
-  }
 
   if(cat_trans != "onehot_encoding" & cat_trans != "label_encoding")
     stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
-
+# Check train set and test set columns are the same
+  if (!dplyr::all_equal(colnames(x_train), colnames(x_test)))
+    stop("Columns of train and test set must be identical.")
   # block to ensure consistency in naming convention
   numeric = col_names$numeric
   categorical = col_names$categorical
@@ -92,4 +90,3 @@ column_transformer <- function(x_train,x_test, col_names, num_trans="standard_sc
 
 
 }
-
