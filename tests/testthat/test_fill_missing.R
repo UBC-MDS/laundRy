@@ -17,37 +17,37 @@ test_that("Output objects of fill_missing() are dataframes", {
 
 test_that("Training set mean imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
-  train_out <- output$train
+  train_out <- output$x_train
   expect_equal(train_out$x[3], 3)
 })
 
 test_that("Test set mean imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
-  test_out <- output$test
+  test_out <- output$x_test
   expect_equal(test_out$x[3], 3)
 })
 
 test_that("Training set median imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
-  train_out <- output$train
+  train_out <- output$x_train
   expect_equal(train_out$x[3], 3)
 })
 
 test_that("Test set median imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
-  test_out <- output$test
+  test_out <- output$x_test
   expect_equal(test_out$x[3], 3)
 })
 
 test_that("Training set categorical imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
-  train_out <- output$train
+  train_out <- output$x_train
   expect_equal(train_out$y[3], 2)
   })
 
 test_that("Test set categorical imputation accuate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
-  test_out <- output$test
+  test_out <- output$x_test
   expect_equal(test_out$y[2], 2)
 })
 

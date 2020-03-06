@@ -25,12 +25,12 @@ getmode <- function(v) {
 #' fill_missing(df, list('weight'), list('education'), 'mean', 'mode') # UPDATE example??
 #'
 #' @export
-fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
+fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
 {
   # Check input types  are as specified
-  if (!is.data.frame(df_train))
+  if (!is.data.frame(x_train))
     stop("Training set must be a dataframe.")
-  if (!is.data.frame(df_test))
+  if (!is.data.frame(x_test))
     stop("Test set must be a dataframe.")
   if (!is.list(column_list))
     stop("num_list must be a named list of columns.")
@@ -40,12 +40,12 @@ fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
     stop("cat_imp method must be a string.")
 
   # Check train set and test set columns are the same
-  if (!dplyr::all_equal(colnames(df_train), colnames(df_test)))
+  if (!dplyr::all_equal(colnames(x_train), colnames(x_test)))
     stop("Columns of train and test set must be identical.")
 
   # Check column categories as well as
   # that all columns listed in the named list are in the df
-  colnames = df_train %>% names
+  colnames = x_train %>% names
   for (type in column_list){
     for (column in type){
       if(!is.element(column, colnames))
@@ -64,28 +64,28 @@ fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
   # Imputation methods for numerical columns
   for (column in column_list$"numeric"){
     if (num_imp == "mean"){
-      train_col_mean <- df_train %>% dplyr::select(column) %>% dplyr::pull() %>% mean(na.rm = TRUE)
+      train_col_mean <- x_train %>% dplyr::select(column) %>% dplyr::pull() %>% mean(na.rm = TRUE)
       # impute training mean to train column
-      df_train <- df_train %>%
+      x_train <- x_train %>%
         dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                          train_col_mean,
                                          !!rlang::sym(column)))
       # impute _training mean_ to test column
-      df_test <- df_test %>%
+      x_test <- x_test %>%
         dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                          train_col_mean,
                                          !!rlang::sym(column)))
     }
 
     if (num_imp == "median"){
-      train_col_med <- df_train %>% dplyr::select(column) %>% dplyr::pull() %>% median(na.rm = TRUE)
+      train_col_med <- x_train %>% dplyr::select(column) %>% dplyr::pull() %>% median(na.rm = TRUE)
       # impute training median to train column
-      df_train <- df_train %>%
+      x_train <- x_train %>%
         dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                          train_col_med,
                                          !!rlang::sym(column)))
       # impute _training median_ to test column
-      df_test <- df_test %>%
+      x_test <- x_test %>%
         dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                          train_col_med,
                                          !!rlang::sym(column)))
@@ -94,14 +94,14 @@ fill_missing <- function(df_train, df_test, column_list, num_imp, cat_imp)
 
   # Imputation methods for categorical columns
   for (column in column_list$"categorical"){
-    train_col_mode <- df_train %>% dplyr::select(column) %>% dplyr::pull() %>% getmode()
+    train_col_mode <- x_train %>% dplyr::select(column) %>% dplyr::pull() %>% getmode()
     # impute training mode to train column
-    df_train <- df_train %>%
+    x_train <- x_train %>%
       dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                        train_col_mode,
                                        !!rlang::sym(column)))
     # impute _training mode_ to test column
-    df_test <- df_test %>%
+    x_test <- x_test %>%
       dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
                                        train_col_mode,
                                        !!rlang::sym(column)))
