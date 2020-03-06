@@ -27,7 +27,7 @@ feature_selection <- function(X,y,mode,n_features) {
                           verbose = FALSE, #prevents copious amounts of output from being produced.
     )
 
-    lm_m <- rfe(X,
+    lm_m <- caret::rfe(X,
                 y,
                 sizes = c(1:ncol(X)),
                 rfeControl = control)
