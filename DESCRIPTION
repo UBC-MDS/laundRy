@@ -27,4 +27,6 @@ Imports:
     tidyr,
     rlang,
     magrittr,
-    caret
+    caret, 
+    stats
+

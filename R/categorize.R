@@ -11,6 +11,7 @@
 #' @export
 #' @examples
 #' categorize(data.frame(a = c(1.2,2.3), b = c('a','b','c')))
+
 categorize <- function(df, max_cat = 10) {
   # Check that inputs are valid
   if(max_cat%%1 != 0 | max_cat < 1) stop("Error: max_cat must be a positive integer")
@@ -34,7 +35,6 @@ categorize <- function(df, max_cat = 10) {
   # Return list of vectors with duplicates removed
   return(list(numeric=unique(numeric), categorical=unique(categorical)))
 }
-
 
 
 
