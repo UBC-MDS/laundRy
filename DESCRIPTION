@@ -26,4 +26,5 @@ Imports:
     dplyr,
     tidyr,
     rlang,
-    magrittr
+    magrittr,
+    caret
