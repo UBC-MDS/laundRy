@@ -4,28 +4,29 @@
 \alias{fill_missing}
 \title{Handles missing values in a dataframe}
 \usage{
-fill_missing(df, num_list, cat_list, num_imp, cat_imp)
+fill_missing(x_train, x_test, column_list, num_imp, cat_imp)
 }
 \arguments{
-\item{df}{dataframe to be transformed}
+\item{x_train}{training set dataframe to be transformed}
 
-\item{num_list}{list of columns to have numerical imputation applied}
+\item{x_test}{test set dataframe to be transformed}
 
-\item{cat_list}{list of columns to have categorical imputation applied}
+\item{column_list}{named list of columns with two sub vectors, must be named
+'numeric' and 'categorical'}
 
-\item{num_imp}{method for numerical imputation}
+\item{num_imp}{method for numerical imputation (default = "mean")}
 
 \item{cat_imp}{method for categorical imputation}
 }
 \value{
-df, with missing values replaced by the specified method
+list, with missing values replaced by the specified method
 }
 \description{
-Replace missing values in dataframe columns by the specified methods. 
-Separate methods can be applied for categorical column imputation and 
+Replace missing values in dataframe columns by the specified methods.
+Separate methods can be applied for categorical column imputation and
 numerical column imputation.
 }
 \examples{
-fill_missing(df, list('weight'), list('education'), 'mean', 'mode')
+fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
 
 }
