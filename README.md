@@ -108,33 +108,24 @@ categorize(df)
 ```R
 library(laundRy)
 
-df_train <- data.frame(a = c(, 2, NA, 4, 5, 1, 2, 3, 4, 5),
-                       b = (1.2, 3.4, 3.0, 4.9, 5.3, 6.1, 8.8, 9.4, NA, 1.2),
-                       c = c('A','B','C','D','E','F','B','H','I',NA))
+df_train <- data.frame(a = c(1.5, 2.5, NA, 4.5, 5.5),
+                       b = c(1, 2, 2, 2, NA))
+df_test <- data.frame(a = c(6.5, NA, 0),
+                       b = c(0, 1, NA))
 
-df_test <- data.frame(a = c(6, NA, 0),
-                       b = c(0.5, 9.2, NA),
-                       c = c(NA, 'B', 'D'))
-
-fill_missing(df_train, df_test, list(numeric = c('a', 'b'), categorical = c('c')))
+fill_missing(df_train, df_test, list(numeric = c('a'), categorical = c('b')), "mean", "mode" )
 >>> $x_train
-    [1]      a    b    c
-        0  1.0  1.2    A
-        1  2.0  3.4    B
-        2  3.0  3.0    C
-        3  4.0  4.9    D
-        4  5.0  5.3    E
-        5  1.0  6.1    F
-        6  2.0  8.8    B
-        7  3.0  9.4    H
-        8  4.0  4.8    I
-        9  5.0  1.2    B
+    [1]      a    b    
+        0  1.5  1    
+        1  2.5  2    
+        2  3.5  2    
+        3  4.5  2    
 
     $x_test
-    [1]      a    b    c
-        0  6.0  0.5    B
-        1  3.0  9.2    B
-        2  0.0  4.8    C
+    [1]      a    b    
+        0  6.5  0    
+        1  3.5   1  
+        2  0.0  2    
     
 
 fill_missing(df_train, df_test, list(numeric = c('a', 'b'), categorical = c('c'))) 
