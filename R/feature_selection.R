@@ -31,7 +31,7 @@ feature_selection <- function(X,y,mode,n_features) {
     control <- caret::rfeControl(functions = caret::lmFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
-                          verbose = FALSE, #prevents copious amounts of output from being produced.
+                          verbose = FALSE,
     )
 
     lm_m <- caret::rfe(X,
@@ -50,7 +50,7 @@ feature_selection <- function(X,y,mode,n_features) {
     control <- caret::rfeControl(functions = caret::lrFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
-                          verbose = FALSE, #prevents copious amounts of output from being produced.
+                          verbose = FALSE,
     )
 
     lr_m <- caret::rfe(X,
