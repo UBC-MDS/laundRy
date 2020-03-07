@@ -15,7 +15,7 @@
 #' @examples
 #' feature_selection(data.frame(X1 = c(2,4,3), X2 = c('c','d','c')),c(4,3,5),"regression",2)
 
-library(caret)
+
 feature_selection <- function(X,y,mode,n_features) {
 
   #Checking for dataframe
@@ -28,7 +28,7 @@ feature_selection <- function(X,y,mode,n_features) {
 
   if (mode == "regression") {
 
-    control <- caret::rfeControl(functions = lmFuncs,
+    control <- caret::rfeControl(functions = caret::lmFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
                           verbose = FALSE, #prevents copious amounts of output from being produced.
@@ -47,7 +47,7 @@ feature_selection <- function(X,y,mode,n_features) {
       stop("Input target is not factor")
     }
 
-    control <- caret::rfeControl(functions = lrFuncs,
+    control <- caret::rfeControl(functions = caret::lrFuncs,
                           method = "cv", #cross validation,
                           returnResamp = "all",
                           verbose = FALSE, #prevents copious amounts of output from being produced.
