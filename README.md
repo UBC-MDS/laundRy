@@ -127,27 +127,6 @@ fill_missing(df_train, df_test, list(numeric = c('a'), categorical = c('b')), "m
         1  3.5   1  
         2  0.0  2    
     
-
-fill_missing(df_train, df_test, list(numeric = c('a', 'b'), categorical = c('c'))) 
-             num_imp = 'median')
->>> $x_train
-    [1]      a    b    c
-        0  1.0  1.2    A
-        1  2.0  3.4    B
-        2  3.0  3.0    C
-        3  4.0  4.9    D
-        4  5.0  5.3    E
-        5  1.0  6.1    F
-        6  2.0  8.8    B
-        7  3.0  9.4    H
-        8  4.0  4.9    I
-        9  5.0  1.2    B
-
-    $x_test
-    [1]      a    b    c
-        0  6.0  0.5    B
-        1  3.0  9.2    B
-        2  0.0  4.9    C
 ```
 
 #### transform_columns()
