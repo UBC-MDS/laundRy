@@ -1,9 +1,8 @@
 context("fill_missing")
-
 source("helper_function_fill_missing.R")
 
 # This script tests the fill missing function
-
+# Each function's purpose is given in the test_that string
 test_that("Output length of fill_missing() is correct", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
   expect_equal(length(output), 2)
@@ -15,37 +14,37 @@ test_that("Output objects of fill_missing() are dataframes", {
   expect_equal(class(output[2]), 'list')
 })
 
-test_that("Training set mean imputation accuate", {
+test_that("Training set mean imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
   train_out <- output$x_train
   expect_equal(train_out$x[3], 3)
 })
 
-test_that("Test set mean imputation accuate", {
+test_that("Test set mean imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "mean", "mode")
   test_out <- output$x_test
   expect_equal(test_out$x[3], 3)
 })
 
-test_that("Training set median imputation accuate", {
+test_that("Training set median imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
   train_out <- output$x_train
   expect_equal(train_out$x[3], 3)
 })
 
-test_that("Test set median imputation accuate", {
+test_that("Test set median imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
   test_out <- output$x_test
   expect_equal(test_out$x[3], 3)
 })
 
-test_that("Training set categorical imputation accuate", {
+test_that("Training set categorical imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
   train_out <- output$x_train
   expect_equal(train_out$y[3], 2)
   })
 
-test_that("Test set categorical imputation accuate", {
+test_that("Test set categorical imputation accurate", {
   output <- fill_missing(df_tr, df_te, list_input, "median", "mode")
   test_out <- output$x_test
   expect_equal(test_out$y[2], 2)
