@@ -36,7 +36,7 @@ test_3 <- function(){
   test_that("Test result for classification", {
     X = generate_data_classification()[[1]]
     y = generate_data_classification()[[2]]
-    expect_true(feature_selection(X,y,"classification",1) == "x1")
+    expect_true(feature_selection(X,y,"classification",1) == "x2")
 
   })
 
