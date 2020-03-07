@@ -6,11 +6,12 @@
 #' that fall into each category
 #'
 #' @param df data.frame
+#' @param max_cat int
 #'
 #' @return list
 #' @export
 #' @examples
-#' categorize(data.frame(a = c(1.2,2.3), b = c('a','b','c')))
+#' categorize(data.frame(a = c(1.2,2.3,3.4), b = c('a','b','c')))
 
 categorize <- function(df, max_cat = 10) {
   # Check that inputs are valid

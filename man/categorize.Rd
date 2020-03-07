@@ -8,6 +8,8 @@ categorize(df, max_cat = 10)
 }
 \arguments{
 \item{df}{data.frame}
+
+\item{max_cat}{int}
 }
 \value{
 list
@@ -19,5 +21,5 @@ and return a list of lists labeled 'numeric',
 that fall into each category
 }
 \examples{
-categorize(data.frame(a = c(1.2,2.3), b = c('a','b','c')))
+categorize(data.frame(a = c(1.2,2.3,3.4), b = c('a','b','c')))
 }
