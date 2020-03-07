@@ -21,6 +21,7 @@ getmode <- function(v) {
 #'
 #' @return list, with missing values replaced by the specified method
 #' @importFrom magrittr %>%
+#' @importFrom rlang :=
 #' @examples
 #' fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
 #'
@@ -54,7 +55,7 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
   }
 
   # Check that all columns have numeric data
-  if (!dim(x_train)[2]==dim(select_if(x_train, is.numeric))[2])
+  if (!dim(x_train)[2]==dim(dplyr::select_if(x_train, is.numeric))[2])
       stop("Columns must have numeric data, encode categorical variables as integers")
 
   # Check that numerical imputation method is one of the two options
@@ -82,7 +83,7 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
     }
 
     if (num_imp == "median"){
-      train_col_med <- x_train %>% dplyr::select(column) %>% dplyr::pull() %>% median(na.rm = TRUE)
+      train_col_med <- x_train %>% dplyr::select(column) %>% dplyr::pull() %>% stats::median(na.rm = TRUE)
       # impute training median to train column
       x_train <- x_train %>%
         dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),
