@@ -5,9 +5,9 @@
 #' 'categorical' and 'text' containing column names
 #' that fall into each category
 #'
-#' @param df data.frame, a dataset
-#' @param max_cat int, maximum number of unique values that
-#' defines a categorical column
+#' @param df a data.frame
+#' @param max_cat int, the maximum number of unique values that
+#' define a categorical column
 #'
 #' @return list with sub vectors named 'numeric' and 'categorical',
 #' containing column names of each type

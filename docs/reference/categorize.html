@@ -139,17 +139,17 @@ that fall into each category</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>data.frame</p></td>
+      <td><p>a data.frame</p></td>
     </tr>
     <tr>
       <th>max_cat</th>
-      <td><p>int</p></td>
+      <td><p>int, the maximum number of unique values that define a categorical column</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list</p>
+    <p>list with sub vectors named 'numeric' and 'categorical', containing column names of each type</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>categorize</span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>a</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1.2</span>,<span class='fl'>2.3</span>,<span class='fl'>3.4</span>), <span class='kw'>b</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'a'</span>,<span class='st'>'b'</span>,<span class='st'>'c'</span>)))</div><div class='output co'>#&gt; $numeric
