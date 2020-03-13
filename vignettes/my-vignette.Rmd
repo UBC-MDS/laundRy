@@ -1,0 +1,183 @@
+---
+title: "An Introduction to laundRy"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(laundRy)
+```
+
+Before being able to perform any statistical analysis or machine learning, there are many standard pre-processing techniques required for dataframes. These include:
+
+* determining which columns in a df are categorical and which are numeric
+* filling missing values with appropriate imputation methods
+* transforming values in numerical columns 
+* selecting which columns are important in regression and classification tasks
+
+The laundRy package aims to take care of these mundane but important tasks for you, so you can spend more of your time and energy on the fun stuff! Let us do your dirty laundRy.
+
+## Use Case and Examples
+
+>You have a dataset that you want to pass in to a machine learning algorithm. You have already separated your target from features, and split the data into training and test sets. You know the dataset has NA values and features of varying types, and additionally, the dataset contains more features than you'd like to train on. This is going to be a headache!
+
+#### categorize()
+
+>Certain transformations are valid for only certain column types. (e.g. OHE is applicable to categorical features, and scaling is applicable to numerical features). `categorize()` allows you to pass your entire dataframe into a function and creates lists of categorical and numerical features that you can pass into a transformation pipeline. 
+
+```R
+df <- data.frame(a = c(1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 0),
+                       b = c(1.2, 3.4, 3.0, 4.9, 5.3, 6.1, 8.8, 9.4, 10.4, 1.3, 0.0),
+                       c = c('A','B','C','D','E','F','G','H','I','J','B'))
+
+# categorize with default max_cat (10)
+categorize(df)
+>>> $numeric
+    [1] "b"
+
+    $categorical
+    [1] "c" "a"
+
+
+# categorize with max_cat = 5 (column c is neither numeric or categorical 
+# under this restriction)
+categorize(df, max_cat = 5)
+>>> $numeric
+    [1] "a" "b"
+
+    $categorical
+    [1] "c"
+
+# Explicitly setting dtype to override max_cat settings for a column
+df$b = as.factor(df$b)
+categorize(df)
+>>> $numeric
+    [1] character(0)
+
+    $categorical
+    [1] "b" "c" "a"
+```
+
+#### fill_missing()
+
+> Next, let's fill NA values in your dataframe. This is like finding those missing socks! You can specify how numerical features are imputed (mean, median), and categorical NA values are imputed by the mode of the feature. The imputed values are calculated from the training set, and applied to NA values in both the training and test set. The training and test sets are passed in, and filled training and test sets are returned.
+
+
+```R
+#### fill_missing()
+
+library(laundRy)
+
+df_train <- data.frame(a = c(1.5, 2.5, NA, 4.5, 5.5),
+                       b = c(1, 2, 2, 2, NA))
+df_test <- data.frame(a = c(6.5, NA, 0),
+                       b = c(0, 1, NA))
+
+fill_missing(df_train, df_test, list(numeric = c('a'), 
+                                     categorical = c('b')), "mean", "mode" )
+
+$x_train
+    [1]      a    b    
+        0  1.5  1    
+        1  2.5  2    
+        2  3.5  2    
+        3  4.5  2    
+
+$x_test
+    [1]      a    b    
+        0  6.5  0    
+        1  3.5   1  
+        2  0.0  2    
+```
+
+#### transform_columns()
+
+> Now that you have parsed your dataframe into categorical and numeric features and filled the missing values, `transform_columns()` is a one-stop shop for applying common transformations to features by their column types. Categorical columns may be one-hot-encoded or ordinal encoded, and a Standard Scaler or MinMax scaler may be applied to numerical columns. Transformations will be fit on the training set, and applied to both the training and test sets. The training and test sets are passed in, and transformed training and test sets are returned.
+
+```R
+df_train <- data.frame(a = c(1, 2, 3),
+                       b = c(1.2, 3.4, 3.0),
+                       c = c('A','B','C'))
+
+df_test <- data.frame(a = c(6, 2),
+                       b = c(0.5, 9.2),
+                       c = ('B', 'B'))
+
+transform_columns(df_train, df_test, list(numeric = c('a', 'b'), categorical = c('c')))
+
+$x_train
+    [1]       a      b    A  B  C
+        0  -1.2  -1.39    1  0  0
+        1   0.0   0.91    0  1  0
+        2   1.2   0.49    0  0  1
+$x_test
+    [1]       a      b    A  B  C
+         0  4.9   -2.1    0  1  0
+         1  1.2   6.96    0  1  0
+```
+
+
+#### select_features()
+
+>Finally, you have your filled and transformed training and testing datasets. Your test set contains more features than you'd like to use, since you know that some features are better predictors than others. You can use `select_features()` to obtain a specified number of the most important features, which you can then use to subset your feature datasets before passing them into a machine learning algorithm.
+
+```R
+df <- data.frame(a = c(1, 2, 3),
+                       b = c(1.2, 2.2, 3.2),
+                       c = c(10.4, 0.02, 5.4))
+
+target = c(1, 2, 3)
+
+
+select_features(df, target, mode = 'regression', n_features = 2)
+
+"a" "b"
+```
+
+> There it is, you have categorized your columns, imputed missing values, transformed your features, and determined which ones are most relevant for your problem. The laundRy is done, it's time to put on your favourite dress and go dance!
+
+#### Proposed end-to-end workflow using laundRy
+
+```R
+library(laundRy)
+
+X_train <- data.frame(a = c(, 2, NA, 4, 5, 1, 2, 3, 4, 5),
+                       b = (1.2, 3.4, 3.0, 4.9, 5.3, 6.1, 8.8, 9.4, NA, 1.2),
+                       c = c('A','B','C','D','E','F','B','H','I',NA))
+
+X_test <- data.frame(a = c(6, NA, 0),
+                       b = c(0.5, 9.2, NA),
+                       c = c(NA, 'B', 'D'))
+
+y_train <- c(1, 2, 3, 4, 5, 6, 2, 3, 4, 5)
+
+# Categorize columns
+col_list <- categorize(X_train)
+
+# Fill missing values
+filled_list <- fill_missing(X_train, X_test, col_list)
+X_train_filled <- filled_list$x_train
+X_test_filled <- filled_list$x_test
+
+# Transform data
+transformed_list <- transform_columns(X_train_filled, X_test_filled, col_list)
+X_train_transformed <-transformed_list$x_train
+X_test_transformed <- transformed_list$x_test
+
+# Select features
+cols <- select_features(X_train_transformed, y_train, mode = 'regression')
+
+X_train <- X_train_transformed[cols]
+X_test <- X_test_transformed[cols]
+
+```
