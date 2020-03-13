@@ -7,12 +7,14 @@
 categorize(df, max_cat = 10)
 }
 \arguments{
-\item{df}{data.frame}
+\item{df}{data.frame, a dataset}
 
-\item{max_cat}{int}
+\item{max_cat}{int, maximum number of unique values that
+defines a categorical column}
 }
 \value{
-list
+list with sub vectors named 'numeric' and 'categorical',
+containing column names of each type
 }
 \description{
 Denote each dataframe category as numeric, categorical, or text
