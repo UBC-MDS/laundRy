@@ -4,7 +4,7 @@
 # laundRy
 
 <!-- badges: start -->
-
+[![codecov](https://codecov.io/gh/UBC-MDS/pylaundry/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/pylaundry)
 <!-- badges: end -->
 
 The `laundRy` package performs many standard preprocessing techniques
