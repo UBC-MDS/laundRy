@@ -5,10 +5,12 @@
 #' 'categorical' and 'text' containing column names
 #' that fall into each category
 #'
-#' @param df data.frame
-#' @param max_cat int
+#' @param df data.frame, a dataset
+#' @param max_cat int, maximum number of unique values that
+#' defines a categorical column
 #'
-#' @return list
+#' @return list with sub vectors named 'numeric' and 'categorical',
+#' containing column names of each type
 #' @export
 #' @examples
 #' categorize(data.frame(a = c(1.2,2.3,3.4), b = c('a','b','c')))

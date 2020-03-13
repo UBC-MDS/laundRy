@@ -4,7 +4,9 @@
 # laundRy
 
 <!-- badges: start -->
+[![codecov](https://codecov.io/gh/UBC-MDS/pylaundry/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/pylaundry)
 
+![R-CMD-check](https://github.com/UBC-MDS/laundRy/workflows/R-CMD-check/badge.svg?branch=master)
 <!-- badges: end -->
 
 The `laundRy` package performs many standard preprocessing techniques
@@ -13,7 +15,9 @@ learning. The package functionality includes categorizing column types,
 handling missing data and imputation, transforming/standardizing columns
 and feature selection. The `laundRy` package aims to remove much of the
 grunt work in the typical data science workflow, allowing the analyst
-maximum time and energy to devote to modelling\!
+maximum time and energy to devote to modelling\!<br><br>
+
+More info about the package in the [Vignette](https://ubc-mds.github.io/laundRy/articles/my-vignette.html).
 
 ## Installation
 
@@ -62,148 +66,6 @@ devtools::install_github("UBC-MDS/laundRy")
     Columns and providing a list of the categorized columns. `laundRy`
     is the first package we are aware of to abstract away the full
     dataframe pre-processing workflow with a unified and simple API.
-
-
-## Usage and examples
-
-#### categorize()
-
-```R
-library(laundRy)
-
-df <- data.frame(a = c(1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 0),
-                       b = c(1.2, 3.4, 3.0, 4.9, 5.3, 6.1, 8.8, 9.4, 10.4, 1.3, 0.0),
-                       c = c('A','B','C','D','E','F','G','H','I','J','B'))
-
-# categorize with default max_cat (10)
-categorize(df)
->>> $numeric
-    [1] "b"
-
-    $categorical
-    [1] "c" "a"
-
-
-# categorize with max_cat = 5 (column c is neither numeric or categorical 
-# under this restriction)
-categorize(df, max_cat = 5)
->>> $numeric
-    [1] "a" "b"
-
-    $categorical
-    [1] "c"
-
-# Explicitly setting dtype to override max_cat settings for a column
-df$b = as.factor(df$b)
-categorize(df)
->>> $numeric
-    [1] character(0)
-
-    $categorical
-    [1] "b" "c" "a"
-```
-
-#### fill_missing()
-
-```R
-library(laundRy)
-
-df_train <- data.frame(a = c(1.5, 2.5, NA, 4.5, 5.5),
-                       b = c(1, 2, 2, 2, NA))
-df_test <- data.frame(a = c(6.5, NA, 0),
-                       b = c(0, 1, NA))
-
-fill_missing(df_train, df_test, list(numeric = c('a'), categorical = c('b')), "mean", "mode" )
->>> $x_train
-    [1]      a    b    
-        0  1.5  1    
-        1  2.5  2    
-        2  3.5  2    
-        3  4.5  2    
-
-    $x_test
-    [1]      a    b    
-        0  6.5  0    
-        1  3.5   1  
-        2  0.0  2    
-    
-```
-
-#### transform_columns()
-
-```R
-library(laundRy)
-
-df_train <- data.frame(a = c(1, 2, 3),
-                       b = c(1.2, 3.4, 3.0),
-                       c = c('A','B','C'))
-
-df_test <- data.frame(a = c(6, 2),
-                       b = c(0.5, 9.2),
-                       c = ('B', 'B'))
-
-transform_columns(df_train, df_test, list(numeric = c('a', 'b'), categorical = c('c')))
->>> $x_train
-    [1]       a      b    A  B  C
-        0  -1.2  -1.39    1  0  0
-        1   0.0   0.91    0  1  0
-        2   1.2   0.49    0  0  1
-
-    $x_test
-    [1]       a      b    A  B  C
-         0  4.9   -2.1    0  1  0
-         1  1.2   6.96    0  1  0
-```
-
-#### select_features()
-
-```R
-library(laundRy)
-
-df <- data.frame(a = c(1, 2, 3),
-                       b = c(1.2, 2.2, 3.2),
-                       c = c(10.4, 0.02, 5.4))
-
-target = c(1, 2, 3)
-
-
-select_features(df, target, mode = 'regression', n_features = 2)
->>>  "a" "b"
-```
-
-#### Proposed workflow
-
-```R
-library(laundRy)
-
-X_train <- data.frame(a = c(, 2, NA, 4, 5, 1, 2, 3, 4, 5),
-                       b = (1.2, 3.4, 3.0, 4.9, 5.3, 6.1, 8.8, 9.4, NA, 1.2),
-                       c = c('A','B','C','D','E','F','B','H','I',NA))
-
-X_test <- data.frame(a = c(6, NA, 0),
-                       b = c(0.5, 9.2, NA),
-                       c = c(NA, 'B', 'D'))
-
-y_train <- c(1, 2, 3, 4, 5, 6, 2, 3, 4, 5)
-
-# Categorize columns
-col_list <- categorize(X_train)
-
-# Fill missing values
-filled_list <- fill_missing(X_train, X_test, col_list)
-X_train_filled <- filled_list$x_train
-X_test_filled <- filled_list$x_test
-
-# Transform data
-transformed_list <- transform_columns(X_train_filled, X_test_filled, col_list)
-X_train_transformed <-transformed_list$x_train
-X_test_transformed <- transformed_list$x_test
-
-# Select features
-cols <- select_features(X_train_transformed, y_train, mode = 'regression')
-
-X_train <- X_train_transformed[cols]
-X_test <- X_test_transformed[cols]
 
 ```
 
