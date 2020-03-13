@@ -62,6 +62,11 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+      
+      - name: Install omp
+        if: runner.os == 'Mac'
+        run: |
+          brew install libomp     
 
       - name: Install dependencies
         run: |
