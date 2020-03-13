@@ -25,7 +25,6 @@ Suggests:
     knitr,
     rmarkdown,
     covr
-
 Imports: 
     dplyr,
     tidyr,
