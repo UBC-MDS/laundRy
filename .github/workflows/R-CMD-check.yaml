@@ -64,9 +64,9 @@ jobs:
           sudo -s eval "$sysreqs"
       
       - name: Install omp
-        if: matrix.os == 'macOS-latest'
-        run: |
-          brew install libomp     
+        run:   |
+         if [ "$RUNNER_OS" == "macOS" ]; then
+              brew install libomp     
 
       - name: Install dependencies
         run: |
