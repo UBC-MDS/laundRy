@@ -23,7 +23,9 @@ RoxygenNote: 7.0.2
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    covr
+
 Imports: 
     dplyr,
     tidyr,
@@ -34,3 +36,5 @@ Imports:
     DT,
     e1071
 VignetteBuilder: knitr
+URL: https://github.com/UBC-MDS/laundRy
+BugReports: https://github.com/UBC-MDS/laundRy/issues
