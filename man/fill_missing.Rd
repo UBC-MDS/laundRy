@@ -27,6 +27,8 @@ Separate methods can be applied for categorical column imputation and
 numerical column imputation.
 }
 \examples{
+x_tr <- data.frame('x' = c(2.5, 3.3, NA), 'y' = c(1, NA, 1))
+x_test <- data.frame('x' = c(NA), 'y' = c(NA))
 fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
 
 }
