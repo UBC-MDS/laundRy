@@ -15,7 +15,7 @@ and feature selection. The `laundRy` package aims to remove much of the
 grunt work in the typical data science workflow, allowing the analyst
 maximum time and energy to devote to modelling\!<br><br>
 
-More info about the package in the [Vignette](https://ubc-mds.github.io/laundRy/articles/my-vignette.html)
+More info about the package in the [Vignette](https://ubc-mds.github.io/laundRy/articles/my-vignette.html).
 
 ## Installation
 
