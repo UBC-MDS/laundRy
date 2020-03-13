@@ -31,7 +31,8 @@ input_vec <- data.frame(cat1 = c(1,2,3,1,4,3,3,2,1,1,
                         text1 = sprintf("text value %s", seq(1:30)),
                         num3 = runif(30, min = -100, max = 100),
                         cat3 = rep(c("Mon", "Tue", "Wed", "Thu", "Fri"), times = 6),
-                        text2 = sprintf("text instance #[%s]", seq(1:30))
+                        text2 = sprintf("text instance #[%s]", seq(1:30)),
+                        stringsAsFactors = TRUE
                         )
 
 input_empty <- data.frame()
