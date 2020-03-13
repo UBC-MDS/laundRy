@@ -64,10 +64,10 @@ jobs:
           sudo -s eval "$sysreqs"
       
       - name: Install omp
-        run:   |
-         if [ "$RUNNER_OS" == "macOS" ]; then
-              brew install libomp     
-
+        if: runner.os == 'macOS'
+        run: |
+              brew install libomp
+              
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)
