@@ -1,5 +1,5 @@
 #' Helper function to find mode of a column
-#' @param x a column
+#' @param v a column
 #' @NoRd
 getmode <- function(v) {
   uniqv <- unique(v)
@@ -23,6 +23,8 @@ getmode <- function(v) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang :=
 #' @examples
+#' x_tr <- data.frame('x' = c(2.5, 3.3, NA), 'y' = c(1, NA, 1))
+#' x_test <- data.frame('x' = c(NA), 'y' = c(NA))
 #' fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
 #'
 #' @export

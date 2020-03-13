@@ -7,7 +7,7 @@
 getmode(v)
 }
 \arguments{
-\item{x}{a column}
+\item{v}{a column}
 }
 \description{
 Helper function to find mode of a column
