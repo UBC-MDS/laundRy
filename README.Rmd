@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 # laundRy
 
 <!-- badges: start -->
+[![R build status](https://github.com/UBC-MDS/laundRy/workflows/R-CMD-check/badge.svg)](https://github.com/UBC-MDS/laundRy/actions)
 <!-- badges: end -->
 
 The `laundRy` package performs many standard preprocessing techniques for Tidyverse tibbles, before use in statistical analysis and machine learning. The package functionality includes categorizing column types, handling missing data and imputation, transforming/standardizing columns and feature selection. The `laundRy` package aims to remove much of the grunt work in the typical data science workflow, allowing the analyst maximum time and energy to devote to modelling!

@@ -21,7 +21,8 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.0.2
 Suggests: 
-    testthat
+    testthat,
+    covr
 Imports: 
     dplyr,
     tidyr,
@@ -31,3 +32,5 @@ Imports:
     stats,
     DT,
     e1071
+URL: https://github.com/UBC-MDS/laundRy
+BugReports: https://github.com/UBC-MDS/laundRy/issues
