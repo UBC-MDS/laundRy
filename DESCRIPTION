@@ -28,7 +28,6 @@ Imports:
     tidyr,
     rlang,
     magrittr,
-    ModelMetrics,
     caret,
     stats,
     DT,
