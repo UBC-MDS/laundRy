@@ -6,7 +6,7 @@
 #'
 #'
 #' @param X data.frame of predictors
-#' @param y vector of renponse
+#' @param y vector of response and should be a factor in case of classification
 #' @param mode string regression or classification
 #' @param n_features int
 #'
@@ -14,7 +14,6 @@
 #' @export
 #' @examples
 #' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)
-#' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), factor(c(1, 1, 0)), "classification", 1)
 
 
 feature_selection <- function(X, y, mode, n_features) {
