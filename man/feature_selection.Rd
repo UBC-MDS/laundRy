@@ -24,4 +24,5 @@ list of features that are important
 }
 \examples{
 feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)
+feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), factor(c(1, 1, 0)), "classification", 1)
 }
