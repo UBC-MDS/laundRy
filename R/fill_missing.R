@@ -1,6 +1,6 @@
 #' Helper function to find mode of a column
 #' @param v a column
-#' @NoRd
+#' @noRd
 getmode <- function(v) {
   uniqv <- unique(v)
   uniqv[which.max(tabulate(match(v, uniqv)))]
