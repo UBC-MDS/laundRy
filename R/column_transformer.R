@@ -92,11 +92,11 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
   if(cat_trans == 'onehot_encoding') {
 
     x_train_cat <- matrix(sapply(x_train[, categorical,
-                                       drop = FALSE], as.character),
+                                       drop = FALSE], as.factor),
                           ncol=length(categorical),
                           dimnames = list(rownames(x_train), categorical))
     x_test_cat <- matrix(sapply(x_test[, categorical,
-                                      drop = FALSE], as.character),
+                                      drop = FALSE], as.factor),
                          ncol=length(categorical),
                          dimnames = list(rownames(x_test), categorical))
 
