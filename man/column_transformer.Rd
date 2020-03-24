@@ -32,7 +32,7 @@ Separate methods can be applied for categorical column transformation and
 numerical column transformation.
 }
 \examples{
-x_train <- data.frame('x' = c(2.5, 3.3, 5), 'y' = c(1, 6, 1))
-x_test <- data.frame('x' = c(2), 'y' = c(1))
+x_train <- data.frame('x' = c(2.5, 3.3, 5,8), 'y' = factor(c(1, 6, 1,6)))
+x_test <- data.frame('x' = c(2,1), 'y' = factor(c(1,6)))
 column_transformer(x_train, x_test, list("numeric" = c('x'), "categorical" = c('y')))
 }

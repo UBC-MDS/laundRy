@@ -13,8 +13,8 @@
 #'
 #' @return A list with named items x_train and x_list that have been transformed according to the arguments specified
 #' @examples
-#' x_train <- data.frame('x' = c(2.5, 3.3, 5), 'y' = c(1, 6, 1))
-#' x_test <- data.frame('x' = c(2), 'y' = c(1))
+#' x_train <- data.frame('x' = c(2.5, 3.3, 5,8), 'y' = factor(c(1, 6, 1,6)))
+#' x_test <- data.frame('x' = c(2,1), 'y' = factor(c(1,6)))
 #' column_transformer(x_train, x_test, list("numeric" = c('x'), "categorical" = c('y')))
 #' @export
 #'
@@ -95,10 +95,12 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
                                        drop = FALSE], as.factor),
                           ncol=length(categorical),
                           dimnames = list(rownames(x_train), categorical))
+    x_train_cat <- data.frame(x_train_cat)
     x_test_cat <- matrix(sapply(x_test[, categorical,
                                       drop = FALSE], as.factor),
                          ncol=length(categorical),
                          dimnames = list(rownames(x_test), categorical))
+    x_test_cat <- data.frame(x_test_cat)
 
     x_train <- x_train[ , numeric, drop = FALSE]
     x_test <- x_test[ , numeric, drop = FALSE]
