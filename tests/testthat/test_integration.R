@@ -3,7 +3,7 @@
 source("helper_integration_test.R")
 
 
-col_list = categorize(df=my_train)
+col_list = categorize(df=my_train, max_cat = 4)
 # second function - fill_missing
 clean_data = fill_missing(my_train, my_test,
                           col_list,
@@ -26,7 +26,7 @@ test_that("Output at end of all functions should be a factor of length 2", {
 })
 
 test_that("Most important feature selected at end of all functions should be 'cat_column2' ", {
-  expect_equal(features_selected[[1]] == "cat_column2", TRUE)
+  expect_equal(features_selected[[1]] == "num_column1", TRUE)
 
 })
 

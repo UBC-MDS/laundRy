@@ -7,7 +7,7 @@ source("helper_function_column_transformer.R")
 test_that("Test suite for testing bad inputs from user", {
   expect_error(column_transformer(list(x_train),x_test, column_list ), "Input objects x_train and x_test must be of class dataframe")
   expect_error(column_transformer(x_train,list(x_test), column_list ), "Input objects x_train and x_test must be of class dataframe")
-  expect_error(column_transformer(x_train,x_test, data.frame(column_list) ), "Parameter column_list must be a  list of length 2 specifying named vectors specifying numeric and categoric columns")
+  expect_error(column_transformer(x_train,x_test, data.frame(column_list) ), "Parameter column_list must be a list of length 2 specifying named vectors specifying numeric and categoric columns")
   expect_error(column_transformer(x_train,x_test, column_list, num_trans = "randominput"), "num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
   expect_error(column_transformer(x_train,x_test, column_list, cat_trans = "randominput" ), "cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
   expect_error(column_transformer(x_train, column_list,x_test = x_test[names(x_test)[1]] ), "Columns of train and test set must be identical")

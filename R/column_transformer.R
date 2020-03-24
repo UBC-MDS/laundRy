@@ -9,9 +9,9 @@
 #' @param x_test test set dataframe/tibble
 #' @param column_list  named list of categorical and numeric columns.
 #' @param num_trans method(character) for numerical transformation - Can take values "standard_scaling" or "minmax_scaling" (default = "standard_scaling")
-#' @param cat_trans method(character) for categorical transformation = Cant take values "onehot_encoding" or "label_encoding" (default = "onehot_encoding")
+#' @param cat_trans method(character) for categorical transformation - Cant take values "onehot_encoding" or "label_encoding" (default = "onehot_encoding")
 #'
-#' @return list(x_train,x_test) transformed
+#' @return A list with named items x_train and x_list that have been transformed according to the arguments specified
 #' @examples
 #' x_train <- data.frame('x' = c(2.5, 3.3, 5), 'y' = c(1, 6, 1))
 #' x_test <- data.frame('x' = c(2), 'y' = c(1))
@@ -29,30 +29,23 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
     stop("Input objects x_train and x_test must be of class dataframe")
 
   if(class(column_list) != 'list' | length(column_list) != 2)
-    stop("Parameter column_list must be a
-         list of length 2 specifying named vectors
-         specifying numeric and categoric columns")
+    stop("Parameter column_list must be a list of length 2 specifying named vectors specifying numeric and categoric columns")
 
   if(num_trans != "standard_scaling"
      & num_trans!= "minmax_scaling")
-    stop("num_trans parameter can
-         only be 'standard_scaling' or 'minmax_scaling'")
+    stop("num_trans parameter can only be 'standard_scaling' or 'minmax_scaling'")
 
   if(cat_trans != "onehot_encoding" &
      cat_trans != "label_encoding")
-    stop("cat_trans parameter can only
-         take 'onehot_encoding' or
-         'label_encoding' values")
+    stop("cat_trans parameter can only take 'onehot_encoding' or 'label_encoding' values")
 # Check train set and test set columns are the same
   for (cols in names(x_test)) {
     if(!is.element(cols, names(x_train)))
-      stop("Columns of train and test set
-           must be identical")
+      stop("Columns of train and test set must be identical")
   }
   for (cols in names(x_train)) {
     if(!is.element(cols, names(x_test)))
-      stop("Columns of train and test set
-           must be identical")
+      stop("Columns of train and test set must be identical")
   }
 
 
@@ -62,8 +55,7 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
   for (vect in names(column_list)) {
     for ( col in column_list[[vect]]) {
       if(!is.element(col, names(x_train)))
-        stop("Column names in the named list
-             must be present in dataframe")
+        stop("Column names in the named list must be present in dataframe")
     }
   }
 
@@ -95,12 +87,21 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
   }
 
 
+
   # transformation for categorical columns
   if(cat_trans == 'onehot_encoding') {
-    x_train_cat <- x_train[, categorical, drop = FALSE]
-    x_test_cat <- x_test[, categorical, drop = FALSE]
-    x_train <- x_train[ , !(names(x_train) %in% categorical)]
-    x_test <- x_test[ , !(names(x_test) %in% categorical)]
+
+    x_train_cat <- matrix(sapply(x_train[, categorical,
+                                       drop = FALSE], as.character),
+                          ncol=length(categorical),
+                          dimnames = list(rownames(x_train), categorical))
+    x_test_cat <- matrix(sapply(x_test[, categorical,
+                                      drop = FALSE], as.character),
+                         ncol=length(categorical),
+                         dimnames = list(rownames(x_test), categorical))
+
+    x_train <- x_train[ , numeric, drop = FALSE]
+    x_test <- x_test[ , numeric, drop = FALSE]
 
     dmy <- caret::dummyVars(" ~ .",
                             data = x_train_cat,
@@ -109,7 +110,7 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
                                              newdata = x_train_cat))
 
     x_test_cat <- data.frame(stats::predict(dmy,
-                                            newdata = x_test_cat))
+                                           newdata = x_test_cat))
 
     x_train <- cbind(x_train, x_train_cat)
     x_test <- cbind(x_test, x_test_cat)
@@ -128,7 +129,7 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
     }
   }
 
-  return(list (x_train <- x_train, x_test <- x_test))
+  return(list (x_train =  x_train, x_test =  x_test))
 
 }
 
