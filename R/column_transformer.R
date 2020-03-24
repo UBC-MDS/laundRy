@@ -76,29 +76,29 @@ column_transformer <- function(x_train,x_test, column_list, num_trans="standard_
   # numeric column transformation
 
   if(num_trans == "standard_scaling") {
-    preProcValues <- caret::preProcess(as.data.frame(x_train[,numeric]),
+    preProcValues <- caret::preProcess(x_train[ ,numeric, drop = FALSE],
                                        method = c("center", "scale"))
     x_train[,numeric] <- stats::predict(preProcValues,
-                                        as.data.frame(x_train[,numeric]))
+                                       x_train[ ,numeric, drop = FALSE])
     x_test[,numeric] <- stats::predict(preProcValues,
-                                       as.data.frame(x_test[,numeric]))
+                                       x_test[ ,numeric, drop = FALSE])
 
 
   }else if(num_trans == "minmax_scaling") {
-    preProcValues <- caret::preProcess(as.data.frame(x_train[,numeric]),
+    preProcValues <- caret::preProcess(x_train[, numeric, drop = FALSE],
                                        method = "range")
     x_train[,numeric] <- stats::predict(preProcValues,
-                                        as.data.frame(x_train[,numeric]))
+                                        x_train[ ,numeric, drop = FALSE])
     x_test[,numeric] <- stats::predict(preProcValues,
-                                       as.data.frame(x_test[,numeric]))
+                                       x_test[ ,numeric, drop = FALSE])
 
   }
 
 
   # transformation for categorical columns
   if(cat_trans == 'onehot_encoding') {
-    x_train_cat <- x_train[, categorical]
-    x_test_cat <- x_test[, categorical]
+    x_train_cat <- x_train[, categorical, drop = FALSE]
+    x_test_cat <- x_test[, categorical, drop = FALSE]
     x_train <- x_train[ , !(names(x_train) %in% categorical)]
     x_test <- x_test[ , !(names(x_test) %in% categorical)]
 
