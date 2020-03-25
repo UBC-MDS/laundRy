@@ -10,7 +10,7 @@
 #' @param mode string regression or classification
 #' @param n_features int
 #'
-#' @return list
+#' @return vector
 #' @export
 #' @examples
 #' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)
