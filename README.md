@@ -37,10 +37,10 @@ devtools::install_github("UBC-MDS/laundRy")
 
   - `fill_missing`: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of `categorical`) and imputes missing values based on column type. Missing values in numeric columns may be filled by the mean or median of the training feature dataframe, and categorical columns are filled by the mode of the feature dataframe.
 
-  - `transform_columns`: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of `categorical`) and applies pre-processing techniques to each column based on type. Categorical columns
+  - `column_transformer`: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of `categorical`) and applies pre-processing techniques to each column based on type. Categorical columns
   will be transformed with a One Hot Encoding (based on the training dataframe) and numerical columns will be scaled (based on the training dataframe).
 
-  - `feature_selector`: This function takes in a training dataframe a target vector, a target task (Regression or Classification), and a maximum number of features to select. The
+  - `feature_selection`: This function takes in a training dataframe a target vector, a target task (Regression or Classification), and a maximum number of features to select. The
     function returns the most important features to predict the target vector for the target task.
 
 ## Dependencies
@@ -67,5 +67,4 @@ devtools::install_github("UBC-MDS/laundRy")
     is the first package we are aware of to abstract away the full
     dataframe pre-processing workflow with a unified and simple API.
 
-```
 

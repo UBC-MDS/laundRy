@@ -3,7 +3,11 @@
 #' Denote each dataframe category as numeric, categorical, or text
 #' and return a list of lists labeled 'numeric',
 #' 'categorical' and 'text' containing column names
-#' that fall into each category
+#' that fall into each category. A 'categorical' column is any
+#' column of type 'factor', or any column with fewer than
+#' max_cat unique values. A 'numeric' column is any column
+#' of type 'numeric' that is not considered 'categorical'
+#' under the specified criteria.
 #'
 #' @param df a data.frame
 #' @param max_cat int, the maximum number of unique values that
