@@ -7,13 +7,13 @@
 categorize(df, max_cat = 10)
 }
 \arguments{
-\item{df}{data.frame, a dataset}
+\item{df}{a data.frame}
 
-\item{max_cat}{int, maximum number of unique values that
-defines a categorical column}
+\item{max_cat}{int, the maximum number of unique values that
+define a categorical column}
 }
 \value{
-list with sub vectors named 'numeric' and 'categorical',
+list with char vectors named 'numeric' and 'categorical',
 containing column names of each type
 }
 \description{
@@ -23,5 +23,5 @@ and return a list of lists labeled 'numeric',
 that fall into each category
 }
 \examples{
-categorize(data.frame(a = c(1.2,2.3,3.4), b = c('a','b','c')))
+categorize(data.frame(a = c(1.2, 2.3, 3.4), b = c('a', 'b', 'c')))
 }

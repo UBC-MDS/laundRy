@@ -13,7 +13,8 @@ input <- data.frame(cat1 = c(1,2,3,1,4,3,3,2,1,1,
                     num2 = floor(runif(30, min = -10, max = 10)),
                     text1 = sprintf("text value %s", seq(1:30)),
                     num3 = runif(30, min = -100, max = 100),
-                    cat3 = rep(c("Mon", "Tue", "Wed", "Thu", "Fri"), times = 6),
+                    cat3 = rep(c("Mon", "Tue", "Wed", "Thu", "Fri"),
+                               times = 6),
                     text2 = sprintf("text instance #[%s]", seq(1:30)),
                     stringsAsFactors = FALSE
                     )
@@ -30,7 +31,8 @@ input_vec <- data.frame(cat1 = c(1,2,3,1,4,3,3,2,1,1,
                         num2 = floor(runif(30, min = -10, max = 10)),
                         text1 = sprintf("text value %s", seq(1:30)),
                         num3 = runif(30, min = -100, max = 100),
-                        cat3 = rep(c("Mon", "Tue", "Wed", "Thu", "Fri"), times = 6),
+                        cat3 = rep(c("Mon", "Tue", "Wed", "Thu", "Fri"),
+                                   times = 6),
                         text2 = sprintf("text instance #[%s]", seq(1:30)),
                         stringsAsFactors = TRUE
                         )
@@ -63,8 +65,16 @@ test_that("Output of numerical list is correct", {
 
 test_that("All factors should be classified as categorical", {
   output <- categorize(input_vec)
-  expect_true(all(c(output$categorical %in% list('cat1', 'cat2', 'cat3', 'text1', 'text2'),
-                    list('cat1', 'cat2', 'cat3', 'text1', 'text2') %in% output$categorical)))
+  expect_true(all(c(output$categorical %in% list('cat1',
+                                                 'cat2',
+                                                 'cat3',
+                                                 'text1',
+                                                 'text2'),
+                    list('cat1',
+                         'cat2',
+                         'cat3',
+                         'text1',
+                         'text2') %in% output$categorical)))
 })
 
 test_that("max_cat influences categorization", {
@@ -76,16 +86,23 @@ test_that("max_cat influences categorization", {
 })
 
 test_that("Invalid inputs throw errors", {
-  expect_error(categorize('hello!'), "Error: Input for df must be of class data.frame")
-  expect_error(categorize(c(1,2,3,2,1,2,3)), "Error: Input for df must be of class data.frame")
-  expect_error(categorize(input, -10), "Error: max_cat must be a positive integer")
-  expect_error(categorize(input, 1.3), "Error: max_cat must be a positive integer")
+  expect_error(categorize('hello!'),
+               "Error: Input for df must be of class data.frame")
+  expect_error(categorize(c(1,2,3,2,1,2,3)),
+               "Error: Input for df must be of class data.frame")
+  expect_error(categorize(input, -10),
+               "Error: max_cat must be a positive integer")
+  expect_error(categorize(input, 1.3),
+               "Error: max_cat must be a positive integer")
 })
 
-test_that("Empty list should be returned for empty input or inapplicable input", {
+test_that("Empty list should return for empty / inapplicable input",
+          {
   output_empty <- categorize(input_empty, max_cat = 2)
   output_none <- categorize(input_none, max_cat = 2)
-  expect_equal(output_empty, list(numeric=character(0), categorical=character(0)))
-  expect_equal(output_none, list(numeric=character(0), categorical=character(0)))
+  expect_equal(output_empty, list(numeric=character(0),
+                                  categorical=character(0)))
+  expect_equal(output_none, list(numeric=character(0),
+                                 categorical=character(0)))
 })
 
