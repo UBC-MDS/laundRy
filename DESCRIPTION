@@ -1,14 +1,14 @@
 Package: laundRy
 Title: laundRy - preprocessing package for dataframes
 Version: 0.1
-Authors@R: person("Arun", "Marria", email = "arun.marria@gmail.com",
-                  role = c("aut", "cre"))
+Authors@R: c(person("Arun", "Marria", email = "arun.marria@gmail.com",
+                  role = c("aut")),
            person("Cari", "Gostic", email = "cari.gostic@gmail.com",
-                  role = c("aut", "cre"))
+                  role = c("aut", "cre")),
            person("Alexander", "Hinton", email = "alexander_hinton@ubc.alumni.ca",
-                  role = c("aut", "cre"))
+                  role = c("aut")),
            person("Aman", "Garg", email = "gargkaman7@gmail.com",
-                  role = c("aut", "cre"))
+                  role = c("aut")))
 Description: The laundRy package performs many standard preprocessing techniques 
     for dataframes, before use in statistical analysis and machine learning. 
     The package functionality includes categorizing column types, handling 
