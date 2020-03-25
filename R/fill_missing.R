@@ -11,11 +11,13 @@ getmode <- function(v) {
 #' Replace missing values in dataframe columns by the specified methods.
 #' Separate methods can be applied for categorical column imputation and
 #' numerical column imputation.
+#' Categorical column values must be encoded with integers not with characters.
 #'
 #' @param x_train training set dataframe to be transformed
 #' @param x_test test set dataframe to be transformed
-#' @param column_list named list of columns with two character vectors, must be named
-#' 'numeric' and 'categorical'
+#' @param column_list named list of columns with two character vectors, must be
+#' named numeric' and 'categorical'. Categorical column values must
+#'  be encoded with integers not with characters.
 #' @param num_imp method for numerical imputation, options are "mean and" median
 #' @param cat_imp method for categorical imputation, only option is "mode"
 #'
