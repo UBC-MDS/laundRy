@@ -69,5 +69,18 @@ test_5 <- function(){
 test_5()
 
 
+test_6 <- function(){
+  test_that("Test for number of features less than number of input columns", {
+    X <- generate_data_regression()[[1]]
+    y <- generate_data_regression()[[2]]
+    expect_error(feature_selection(X,y,"regression",5) == "Number of features should be less than number of columns of input data")
+
+  })
+
+}
+
+test_6()
+
+
 
 

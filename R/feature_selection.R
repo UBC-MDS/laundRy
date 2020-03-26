@@ -8,21 +8,25 @@
 #' @param X data.frame of predictors
 #' @param y vector of response and should be a factor in case of classification
 #' @param mode string regression or classification
-#' @param n_features int
+#' @param n_features int number of top important features select from all the features
 #'
-#' @return vector
+#' @return vector of feature nams of top n_features
 #' @export
 #' @examples
 #' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)
+#' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), factor(c(1, 1, 0)), "classification", 1)
 
 
-feature_selection <- function(X, y, mode, n_features) {
+feature_selection <- function(X, y, mode, n_features=1) {
 
   #Checking for dataframe
   if (class(X) != "data.frame"){
     stop("Input Data is not Data Frame")
   }
 
+  if (n_features > length(X)){
+    stop("Number of features should be less than number of columns of input data")
+  }
 
 
 

@@ -39,7 +39,11 @@
 <meta property="og:description" content="Denote each dataframe category as numeric, categorical, or text
 and return a list of lists labeled 'numeric',
 'categorical' and 'text' containing column names
-that fall into each category" />
+that fall into each category. A 'categorical' column is any
+column of type 'factor', or any column with fewer than
+max_cat unique values. A 'numeric' column is any column
+of type 'numeric' that is not considered 'categorical'
+under the specified criteria." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,7 +133,11 @@ that fall into each category" />
     <p>Denote each dataframe category as numeric, categorical, or text
 and return a list of lists labeled 'numeric',
 'categorical' and 'text' containing column names
-that fall into each category</p>
+that fall into each category. A 'categorical' column is any
+column of type 'factor', or any column with fewer than
+max_cat unique values. A 'numeric' column is any column
+of type 'numeric' that is not considered 'categorical'
+under the specified criteria.</p>
     </div>
 
     <pre class="usage"><span class='fu'>categorize</span>(<span class='no'>df</span>, <span class='kw'>max_cat</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>

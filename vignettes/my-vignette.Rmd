@@ -100,6 +100,7 @@ column_transformer(df_train, df_test, list(numeric = c('a', 'b'), categorical = 
 #### feature_selection()
 
 >Finally, you have your filled and transformed training and testing datasets. Your test set contains more features than you'd like to use, since you know that some features are better predictors than others. You can use `feature_selection()` to obtain a specified number of the most important features, which you can then use to subset your feature datasets before passing them into a machine learning algorithm.
+The method used for feature selection is recursive feature selection algorithm. It is based on backward selection process. Under this algorithm, all predictors are used to fit the model then predictors are eliminated based on the rank of importance. For more details, please refer to this [link](https://topepo.github.io/caret/recursive-feature-elimination.html)  
 
 ```{r, eval = FALSE}
 df <- data.frame(a = c(4, 5, 6),
