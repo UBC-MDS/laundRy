@@ -11,4 +11,4 @@ laundRy: A preprocessing package for machine learning.
         MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
         GNU General Public License for more details.
 
-        A copy of the GNU General Public License is available in this repository [here.](https://github.com/UBC-MDS/laundRy/blob/master/LICENSE)
+        A copy of the GNU General Public License is available in this repository https://github.com/UBC-MDS/laundRy/blob/master/LICENSE
