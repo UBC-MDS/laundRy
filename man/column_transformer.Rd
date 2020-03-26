@@ -13,21 +13,26 @@ column_transformer(
 )
 }
 \arguments{
-\item{x_train}{trainingset dataframe/tibble}
+\item{x_train}{training set dataframe/tibble}
 
 \item{x_test}{test set dataframe/tibble}
 
 \item{column_list}{named list of categorical and numeric columns.}
 
-\item{num_trans}{method(character) for numerical transformation (default = "standard_scaling")}
+\item{num_trans}{method(character) for numerical transformation - Can take values "standard_scaling" or "minmax_scaling" (default = "standard_scaling")}
 
-\item{cat_trans}{method(character) for categorical transformation (default = "onehot_encoding")}
+\item{cat_trans}{method(character) for categorical transformation - Cant take values "onehot_encoding" or "label_encoding" (default = "onehot_encoding")}
 }
 \value{
-list(x_train,x_test) transformed
+A list with named items x_train and x_list that have been transformed according to the arguments specified
 }
 \description{
 Transforms  columns in dataframe  by the specified methods.
 Separate methods can be applied for categorical column transformation and
 numerical column transformation.
+}
+\examples{
+x_train <- data.frame('x' = c(2.5, 3.3, 5,8), 'y' = factor(c(1, 6, 1,6)))
+x_test <- data.frame('x' = c(2,1), 'y' = factor(c(1,6)))
+column_transformer(x_train, x_test, list("numeric" = c('x'), "categorical" = c('y')))
 }

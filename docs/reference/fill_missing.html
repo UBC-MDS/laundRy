@@ -38,7 +38,8 @@
 <meta property="og:title" content="Handles missing values in a dataframe — fill_missing" />
 <meta property="og:description" content="Replace missing values in dataframe columns by the specified methods.
 Separate methods can be applied for categorical column imputation and
-numerical column imputation." />
+numerical column imputation.
+Categorical column values must be encoded with integers not with characters." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,7 +128,8 @@ numerical column imputation." />
     <div class="ref-description">
     <p>Replace missing values in dataframe columns by the specified methods.
 Separate methods can be applied for categorical column imputation and
-numerical column imputation.</p>
+numerical column imputation.
+Categorical column values must be encoded with integers not with characters.</p>
     </div>
 
     <pre class="usage"><span class='fu'>fill_missing</span>(<span class='no'>x_train</span>, <span class='no'>x_test</span>, <span class='no'>column_list</span>, <span class='no'>num_imp</span>, <span class='no'>cat_imp</span>)</pre>
@@ -145,27 +147,30 @@ numerical column imputation.</p>
     </tr>
     <tr>
       <th>column_list</th>
-      <td><p>named list of columns with two sub vectors, must be named
-'numeric' and 'categorical'</p></td>
+      <td><p>named list of columns with two character vectors, must be
+named numeric' and 'categorical'. Categorical column values must
+ be encoded with integers not with characters.</p></td>
     </tr>
     <tr>
       <th>num_imp</th>
-      <td><p>method for numerical imputation (default = "mean")</p></td>
+      <td><p>method for numerical imputation, options are "mean and" median</p></td>
     </tr>
     <tr>
       <th>cat_imp</th>
-      <td><p>method for categorical imputation</p></td>
+      <td><p>method for categorical imputation, only option is "mode"</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>list, with missing values replaced by the specified method</p>
+    <p>named list, with two vectors: "x_train", the training set with
+missing values filled, and "x_test", the test set with missing values filled</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>x_tr</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>'x'</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2.5</span>, <span class='fl'>3.3</span>, <span class='fl'>NA</span>), <span class='st'>'y'</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>NA</span>, <span class='fl'>1</span>))
 <span class='no'>x_test</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='st'>'x'</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>), <span class='st'>'y'</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>))
-<span class='fu'>fill_missing</span>(<span class='no'>x_tr</span>, <span class='no'>x_test</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"numeric"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'x'</span>), <span class='st'>"categorical"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'y'</span>)), <span class='st'>'mean'</span>, <span class='st'>'mode'</span>)</div><div class='output co'>#&gt; $x_train
+<span class='fu'>fill_missing</span>(<span class='no'>x_tr</span>, <span class='no'>x_test</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"numeric"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'x'</span>),
+ <span class='st'>"categorical"</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'y'</span>)), <span class='st'>'mean'</span>, <span class='st'>'mode'</span>)</div><div class='output co'>#&gt; $x_train
 #&gt;     x y
 #&gt; 1 2.5 1
 #&gt; 2 3.3 1

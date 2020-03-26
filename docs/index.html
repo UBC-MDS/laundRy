@@ -96,8 +96,8 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>Install the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"UBC-MDS/laundRy"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"UBC-MDS/laundRy"</span>)</a></code></pre></div>
 <div id="features" class="section level3">
 <h3 class="hasAnchor">
 <a href="#features" class="anchor"></a>Features</h3>
@@ -110,8 +110,8 @@
 </ul>
 </li>
 <li><p><code>fill_missing</code>: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of <code>categorical</code>) and imputes missing values based on column type. Missing values in numeric columns may be filled by the mean or median of the training feature dataframe, and categorical columns are filled by the mode of the feature dataframe.</p></li>
-<li><p><code>transform_columns</code>: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of <code>categorical</code>) and applies pre-processing techniques to each column based on type. Categorical columns will be transformed with a One Hot Encoding (based on the training dataframe) and numerical columns will be scaled (based on the training dataframe).</p></li>
-<li><p><code>feature_selector</code>: This function takes in a training dataframe a target vector, a target task (Regression or Classification), and a maximum number of features to select. The function returns the most important features to predict the target vector for the target task.</p></li>
+<li><p><code>column_transformer</code>: This function takes in a training feature dataframe, a testing feature dataframe, and a list of column types (like the output of <code>categorical</code>) and applies pre-processing techniques to each column based on type. Categorical columns will be transformed with a One Hot Encoding (based on the training dataframe) and numerical columns will be scaled (based on the training dataframe).</p></li>
+<li><p><code>feature_selection</code>: This function takes in a training dataframe a target vector, a target task (Regression or Classification), and a maximum number of features to select. The function returns the most important features to predict the target vector for the target task.</p></li>
 </ul>
 </div>
 </div>
@@ -133,7 +133,6 @@
 <li><p>The main feature selection and preprocessing package in R is <a href="https://cran.r-project.org/web/packages/caret/caret.pdf">caret</a>, which carries out similar functionality to our <code>feature_selector</code> function though laundRy makes the workflow more efficient and adds imputation.</p></li>
 <li><p>As far as we know, there are no similar packages for Categorizing Columns and providing a list of the categorized columns. <code>laundRy</code> is the first package we are aware of to abstract away the full dataframe pre-processing workflow with a unified and simple API.</p></li>
 </ul>
-<p>```</p>
 </div>
 </div>
   </div>

@@ -11,15 +11,16 @@ fill_missing(x_train, x_test, column_list, num_imp, cat_imp)
 
 \item{x_test}{test set dataframe to be transformed}
 
-\item{column_list}{named list of columns with two sub vectors, must be named
-'numeric' and 'categorical'}
+\item{column_list}{named list of columns with two character vectors, must be
+named numeric' and 'categorical'.}
 
-\item{num_imp}{method for numerical imputation (default = "mean")}
+\item{num_imp}{method for numerical imputation, options are "mean and" median}
 
-\item{cat_imp}{method for categorical imputation}
+\item{cat_imp}{method for categorical imputation, only option is "mode"}
 }
 \value{
-list, with missing values replaced by the specified method
+named list, with two vectors: "x_train", the training set with
+missing values filled, and "x_test", the test set with missing values filled
 }
 \description{
 Replace missing values in dataframe columns by the specified methods.
@@ -29,6 +30,7 @@ numerical column imputation.
 \examples{
 x_tr <- data.frame('x' = c(2.5, 3.3, NA), 'y' = c(1, NA, 1))
 x_test <- data.frame('x' = c(NA), 'y' = c(NA))
-fill_missing(x_tr, x_test, list("numeric" = c('x'), "categorical" = c('y')), 'mean', 'mode')
+fill_missing(x_tr, x_test, list("numeric" = c('x'),
+ "categorical" = c('y')), 'mean', 'mode')
 
 }
