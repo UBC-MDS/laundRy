@@ -1,2 +1,16 @@
-YEAR: 2020
-COPYRIGHT HOLDER: Arun Marria, Alexander Hinton,  Aman Garg, Cary Gostic
+pyLaundry: A preprocessing package for machine learning.  
+https://github.com/UBC-MDS/pylaundry
+
+        Copyright (C) 2020  Cari Gostic, Alexander Hinton, Arun Marria, Aman Kumar Garg
+
+        This program is free software: you can redistribute it and/or modify
+        it under the terms of the GNU General Public License as published by
+        the Free Software Foundation, either version 3 of the License, or
+        (at your option) any later version.
+
+        This program is distributed in the hope that it will be useful,
+        but WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+        GNU General Public License for more details.
+
+        View the GNU General Public License in our repository [here.](https://github.com/UBC-MDS/laundRy/blob/master/LICENSE.md)
