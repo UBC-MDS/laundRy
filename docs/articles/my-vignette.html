@@ -89,7 +89,7 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a></code></pre></div>
 <p>Before being able to perform any statistical analysis or machine learning, there are many standard pre-processing techniques required for dataframes. These include:</p>
 <ul>
 <li>determining which columns in a df are categorical and which are numeric</li>
@@ -108,38 +108,38 @@
 <h4 class="hasAnchor">
 <a href="#categorize" class="anchor"></a>categorize()</h4>
 <blockquote>
-<p>Certain transformations are valid for only certain column types. (e.g. OHE is applicable to categorical features, and scaling is applicable to numerical features). <code><a href="../reference/categorize.html">categorize()</a></code> allows you to pass your entire dataframe into a function and creates lists of categorical and numerical features that you can pass into a transformation pipeline.</p>
+<p>Certain transformations are valid for only certain column types. (e.g. OHE is applicable to categorical features, and scaling is applicable to numerical features). <code><a href="https://rdrr.io/pkg/laundRy/man/categorize.html">categorize()</a></code> allows you to pass your entire dataframe into a function and creates lists of categorical and numerical features that you can pass into a transformation pipeline.</p>
 </blockquote>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="co"># numeric, 5 unique values</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">  <span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co"># numeric, 11 unique values</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>, <span class="fl">4.9</span>, <span class="fl">5.3</span>, <span class="fl">6.1</span>, <span class="fl">8.8</span>, <span class="fl">9.4</span>, <span class="fl">10.4</span>, <span class="fl">1.3</span>, <span class="fl">0.0</span>),</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  <span class="co"># factor, 10 unique values</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span>,<span class="st">'E'</span>,<span class="st">'F'</span>,<span class="st">'G'</span>,<span class="st">'H'</span>,<span class="st">'I'</span>,<span class="st">'J'</span>,<span class="st">'B'</span>)) </a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># categorize with default max_cat (10)</span></a>
-<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="kw"><a href="../reference/categorize.html">categorize</a></span>(df)</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11"><span class="co">#&gt; $numeric</span></a>
-<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; [1] "b"</span></a>
-<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-14" data-line-number="14"><span class="co">#&gt; $categorical</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15"><span class="co">#&gt; [1] "c" "a"</span></a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># categorize with max_cat = 4</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/categorize.html">categorize</a></span>(df, <span class="dt">max_cat =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; $numeric</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; [1] "a" "b"</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; $categorical</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; [1] "c"</span></a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Explicitly setting dtype to override max_cat settings for a column</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">df<span class="op">$</span>b =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(df<span class="op">$</span>b)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="../reference/categorize.html">categorize</a></span>(df)</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; $numeric</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; character(0)</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; $categorical</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; [1] "b" "c" "a"</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(</a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="co"># numeric, 5 unique values</span></a>
+<a class="sourceLine" id="cb2-3" title="3">  <span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="co"># numeric, 11 unique values</span></a>
+<a class="sourceLine" id="cb2-5" title="5">  <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>, <span class="fl">4.9</span>, <span class="fl">5.3</span>, <span class="fl">6.1</span>, <span class="fl">8.8</span>, <span class="fl">9.4</span>, <span class="fl">10.4</span>, <span class="fl">1.3</span>, <span class="fl">0.0</span>),</a>
+<a class="sourceLine" id="cb2-6" title="6">  <span class="co"># factor, 10 unique values</span></a>
+<a class="sourceLine" id="cb2-7" title="7">  <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>,<span class="st">'D'</span>,<span class="st">'E'</span>,<span class="st">'F'</span>,<span class="st">'G'</span>,<span class="st">'H'</span>,<span class="st">'I'</span>,<span class="st">'J'</span>,<span class="st">'B'</span>)) </a>
+<a class="sourceLine" id="cb2-8" title="8"></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co"># categorize with default max_cat (10)</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/categorize.html">categorize</a></span>(df)</a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; $numeric</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; [1] "b"</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; $categorical</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; [1] "c" "a"</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># categorize with max_cat = 4</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/categorize.html">categorize</a></span>(df, <span class="dt">max_cat =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co">#&gt; $numeric</span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co">#&gt; [1] "a" "b"</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; $categorical</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co">#&gt; [1] "c"</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Explicitly setting dtype to override max_cat settings for a column</span></a>
+<a class="sourceLine" id="cb4-2" title="2">df<span class="op">$</span>b =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(df<span class="op">$</span>b)</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/categorize.html">categorize</a></span>(df)</a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; $numeric</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; character(0)</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; $categorical</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; [1] "b" "c" "a"</span></a></code></pre></div>
 </div>
 <div id="fill_missing" class="section level4">
 <h4 class="hasAnchor">
@@ -147,27 +147,27 @@
 <blockquote>
 <p>Next, let’s fill NA values in your dataframe. This is like finding those missing socks! You can specify how numerical features are imputed (mean, median), and categorical NA values are imputed by the mode of the feature. The imputed values are calculated from the training set, and applied to NA values in both the training and test set. The training and test sets are passed in, and filled training and test sets are returned.</p>
 </blockquote>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">df_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="ot">NA</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>),</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">df_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6.5</span>, <span class="ot">NA</span>, <span class="dv">0</span>),</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw"><a href="../reference/fill_missing.html">fill_missing</a></span>(df_train, df_test, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">numeric =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>), </a>
-<a class="sourceLine" id="cb5-8" data-line-number="8">                                     <span class="dt">categorical =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'b'</span>)), <span class="st">"mean"</span>, <span class="st">"mode"</span> )</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; $x_train</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;     a b</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 1 1.5 1</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 2 2.5 2</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 3 3.5 2</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; 4 4.5 2</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt; 5 5.5 2</span></a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt; $x_test</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;     a b</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; 1 6.5 0</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; 2 3.5 1</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; 3 0.0 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"></a>
+<a class="sourceLine" id="cb5-2" title="2">df_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.5</span>, <span class="fl">2.5</span>, <span class="ot">NA</span>, <span class="fl">4.5</span>, <span class="fl">5.5</span>),</a>
+<a class="sourceLine" id="cb5-3" title="3">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb5-4" title="4">df_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">6.5</span>, <span class="ot">NA</span>, <span class="dv">0</span>),</a>
+<a class="sourceLine" id="cb5-5" title="5">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb5-6" title="6"></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/fill_missing.html">fill_missing</a></span>(df_train, df_test, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">numeric =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>), </a>
+<a class="sourceLine" id="cb5-8" title="8">                                     <span class="dt">categorical =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'b'</span>)), <span class="st">"mean"</span>, <span class="st">"mode"</span> )</a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; $x_train</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt;     a b</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 1 1.5 1</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; 2 2.5 2</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; 3 3.5 2</span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="co">#&gt; 4 4.5 2</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="co">#&gt; 5 5.5 2</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="co">#&gt; $x_test</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="co">#&gt;     a b</span></a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="co">#&gt; 1 6.5 0</span></a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="co">#&gt; 2 3.5 1</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="co">#&gt; 3 0.0 2</span></a></code></pre></div>
 </div>
 <div id="column_transformer" class="section level4">
 <h4 class="hasAnchor">
@@ -175,44 +175,44 @@
 <blockquote>
 <p>Now that you have parsed your dataframe into categorical and numeric features and filled the missing values, <code>transform_columns()</code> is a one-stop shop for applying common transformations to features by their column types. Categorical columns may be one-hot-encoded or ordinal encoded, and a Standard Scaler or MinMax scaler may be applied to numerical columns. Transformations will be fit on the training set, and applied to both the training and test sets. The training and test sets are passed in, and transformed training and test sets are returned.</p>
 </blockquote>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">df_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>),</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>))</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">df_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">                      <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">9.2</span>),</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">                      <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'B'</span>))</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co"># One-hot-encode column 'c', scale columns 'a' and 'b'</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="kw"><a href="../reference/column_transformer.html">column_transformer</a></span>(df_train, df_test, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">numeric =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>, <span class="st">'b'</span>), <span class="dt">categorical =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'c'</span>)))</a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; $x_train</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt;    a          b c.B c.C</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; 1 -1 -1.1377602   0   0</span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; 2  0  0.7395442   1   0</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; 3  1  0.3982161   0   1</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; $x_test</span></a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt;   a         b c.B c.C</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; 1 4 -1.735084   1   0</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; 2 0  5.688801   1   0</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3">df_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb6-4" title="4">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>),</a>
+<a class="sourceLine" id="cb6-5" title="5">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>,<span class="st">'B'</span>,<span class="st">'C'</span>))</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">df_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">6</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb6-8" title="8">                      <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">9.2</span>),</a>
+<a class="sourceLine" id="cb6-9" title="9">                      <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'B'</span>))</a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co"># One-hot-encode column 'c', scale columns 'a' and 'b'</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/column_transformer.html">column_transformer</a></span>(df_train, df_test, <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">numeric =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'a'</span>, <span class="st">'b'</span>), <span class="dt">categorical =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'c'</span>)))</a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co">#&gt; $x_train</span></a>
+<a class="sourceLine" id="cb6-14" title="14"><span class="co">#&gt;    a          b c.B c.C</span></a>
+<a class="sourceLine" id="cb6-15" title="15"><span class="co">#&gt; 1 -1 -1.1377602   0   0</span></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="co">#&gt; 2  0  0.7395442   1   0</span></a>
+<a class="sourceLine" id="cb6-17" title="17"><span class="co">#&gt; 3  1  0.3982161   0   1</span></a>
+<a class="sourceLine" id="cb6-18" title="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb6-19" title="19"><span class="co">#&gt; $x_test</span></a>
+<a class="sourceLine" id="cb6-20" title="20"><span class="co">#&gt;   a         b c.B c.C</span></a>
+<a class="sourceLine" id="cb6-21" title="21"><span class="co">#&gt; 1 4 -1.735084   1   0</span></a>
+<a class="sourceLine" id="cb6-22" title="22"><span class="co">#&gt; 2 0  5.688801   1   0</span></a></code></pre></div>
 </div>
 <div id="feature_selection" class="section level4">
 <h4 class="hasAnchor">
 <a href="#feature_selection" class="anchor"></a>feature_selection()</h4>
 <blockquote>
-<p>Finally, you have your filled and transformed training and testing datasets. Your test set contains more features than you’d like to use, since you know that some features are better predictors than others. You can use <code><a href="../reference/feature_selection.html">feature_selection()</a></code> to obtain a specified number of the most important features, which you can then use to subset your feature datasets before passing them into a machine learning algorithm.</p>
+<p>Finally, you have your filled and transformed training and testing datasets. Your test set contains more features than you’d like to use, since you know that some features are better predictors than others. You can use <code><a href="https://rdrr.io/pkg/laundRy/man/feature_selection.html">feature_selection()</a></code> to obtain a specified number of the most important features, which you can then use to subset your feature datasets before passing them into a machine learning algorithm. The method used for feature selection is recursive feature selection algorithm. It is based on backward selection process. Under this algorithm, all predictors are used to fit the model then predictors are eliminated based on the rank of importance. For more details, please refer to this <a href="https://topepo.github.io/caret/recursive-feature-elimination.html">link</a></p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>),</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">3.2</span>),</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10.4</span>, <span class="fl">0.02</span>, <span class="fl">5.4</span>))</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">target =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co"># Choose the top 2 most important features of df to predict `target`</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="kw"><a href="../reference/feature_selection.html">feature_selection</a></span>(df, target, <span class="dt">mode =</span> <span class="st">'regression'</span>, <span class="dt">n_features =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt; [1] a b</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt; Levels: a b c</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>),</a>
+<a class="sourceLine" id="cb7-2" title="2">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">2.2</span>, <span class="fl">3.2</span>),</a>
+<a class="sourceLine" id="cb7-3" title="3">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10.4</span>, <span class="fl">0.02</span>, <span class="fl">5.4</span>))</a>
+<a class="sourceLine" id="cb7-4" title="4">target =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb7-5" title="5"></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co"># Choose the top 2 most important features of df to predict `target`</span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/feature_selection.html">feature_selection</a></span>(df, target, <span class="dt">mode =</span> <span class="st">'regression'</span>, <span class="dt">n_features =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt; [1] a b</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt; Levels: a b c</span></a></code></pre></div>
 <blockquote>
 <p>There it is, you have categorized your columns, imputed missing values, transformed your features, and determined which ones are most relevant for your problem. The laundRy is done, it’s time to put on your favourite dress and go dance!</p>
 </blockquote>
@@ -220,55 +220,55 @@
 <div id="proposed-end-to-end-workflow-using-laundry" class="section level4">
 <h4 class="hasAnchor">
 <a href="#proposed-end-to-end-workflow-using-laundry" class="anchor"></a>Proposed end-to-end workflow using laundRy</h4>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">X_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>, <span class="fl">4.9</span>, <span class="fl">5.3</span>, <span class="fl">6.1</span>, <span class="fl">8.8</span>, <span class="fl">9.4</span>, <span class="ot">NA</span>, <span class="fl">1.4</span>),</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="ot">NA</span>))</a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">X_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">9.2</span>, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">NA</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">y_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co"># Categorize columns</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">col_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/categorize.html">categorize</a></span>(X_train, <span class="dt">max_cat =</span> <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co"># Fill missing values</span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17">filled_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fill_missing.html">fill_missing</a></span>(X_train, X_test, col_list, <span class="dt">num_imp =</span> <span class="st">'mean'</span>, <span class="dt">cat_imp =</span> <span class="st">'mode'</span>)</a>
-<a class="sourceLine" id="cb8-18" data-line-number="18">X_train_filled &lt;-<span class="st"> </span>filled_list<span class="op">$</span>x_train</a>
-<a class="sourceLine" id="cb8-19" data-line-number="19">X_test_filled &lt;-<span class="st"> </span>filled_list<span class="op">$</span>x_test</a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co"># Transform data</span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22">transformed_list &lt;-<span class="st"> </span><span class="kw"><a href="../reference/column_transformer.html">column_transformer</a></span>(X_train_filled, X_test_filled, col_list)</a>
-<a class="sourceLine" id="cb8-23" data-line-number="23">X_train_transformed &lt;-transformed_list<span class="op">$</span>x_train</a>
-<a class="sourceLine" id="cb8-24" data-line-number="24">X_test_transformed &lt;-<span class="st"> </span>transformed_list<span class="op">$</span>x_test</a>
-<a class="sourceLine" id="cb8-25" data-line-number="25"></a>
-<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co"># Select top 2 features</span></a>
-<a class="sourceLine" id="cb8-27" data-line-number="27">cols &lt;-<span class="st"> </span><span class="kw"><a href="../reference/feature_selection.html">feature_selection</a></span>(X_train_transformed, y_train, <span class="dt">n_features =</span> <span class="dv">2</span>, <span class="dt">mode =</span> <span class="st">'regression'</span>)</a>
-<a class="sourceLine" id="cb8-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb8-29" data-line-number="29">X_train &lt;-<span class="st"> </span>X_train_transformed[cols]</a>
-<a class="sourceLine" id="cb8-30" data-line-number="30">X_test &lt;-<span class="st"> </span>X_test_transformed[cols]</a>
-<a class="sourceLine" id="cb8-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb8-32" data-line-number="32">X_train</a>
-<a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt;    a.3 a.2</span></a>
-<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; 1    0   0</span></a>
-<a class="sourceLine" id="cb8-35" data-line-number="35"><span class="co">#&gt; 2    0   1</span></a>
-<a class="sourceLine" id="cb8-36" data-line-number="36"><span class="co">#&gt; 3    0   0</span></a>
-<a class="sourceLine" id="cb8-37" data-line-number="37"><span class="co">#&gt; 4    0   0</span></a>
-<a class="sourceLine" id="cb8-38" data-line-number="38"><span class="co">#&gt; 5    0   0</span></a>
-<a class="sourceLine" id="cb8-39" data-line-number="39"><span class="co">#&gt; 6    0   0</span></a>
-<a class="sourceLine" id="cb8-40" data-line-number="40"><span class="co">#&gt; 7    0   1</span></a>
-<a class="sourceLine" id="cb8-41" data-line-number="41"><span class="co">#&gt; 8    1   0</span></a>
-<a class="sourceLine" id="cb8-42" data-line-number="42"><span class="co">#&gt; 9    0   0</span></a>
-<a class="sourceLine" id="cb8-43" data-line-number="43"><span class="co">#&gt; 10   0   0</span></a>
-<a class="sourceLine" id="cb8-44" data-line-number="44"></a>
-<a class="sourceLine" id="cb8-45" data-line-number="45">X_test</a>
-<a class="sourceLine" id="cb8-46" data-line-number="46"><span class="co">#&gt;   a.3 a.2</span></a>
-<a class="sourceLine" id="cb8-47" data-line-number="47"><span class="co">#&gt; 1   1   0</span></a>
-<a class="sourceLine" id="cb8-48" data-line-number="48"><span class="co">#&gt; 2   0   0</span></a>
-<a class="sourceLine" id="cb8-49" data-line-number="49"><span class="co">#&gt; 3   0   1</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(laundRy)</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">X_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="ot">NA</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb8-4" title="4">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1.2</span>, <span class="fl">3.4</span>, <span class="fl">3.0</span>, <span class="fl">4.9</span>, <span class="fl">5.3</span>, <span class="fl">6.1</span>, <span class="fl">8.8</span>, <span class="fl">9.4</span>, <span class="ot">NA</span>, <span class="fl">1.4</span>),</a>
+<a class="sourceLine" id="cb8-5" title="5">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="ot">NA</span>))</a>
+<a class="sourceLine" id="cb8-6" title="6"></a>
+<a class="sourceLine" id="cb8-7" title="7">X_test &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">a =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">3</span>, <span class="ot">NA</span>, <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb8-8" title="8">                       <span class="dt">b =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.5</span>, <span class="fl">9.2</span>, <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb8-9" title="9">                       <span class="dt">c =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="ot">NA</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb8-10" title="10"></a>
+<a class="sourceLine" id="cb8-11" title="11">y_train &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb8-12" title="12"></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co"># Categorize columns</span></a>
+<a class="sourceLine" id="cb8-14" title="14">col_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/categorize.html">categorize</a></span>(X_train, <span class="dt">max_cat =</span> <span class="dv">9</span>)</a>
+<a class="sourceLine" id="cb8-15" title="15"></a>
+<a class="sourceLine" id="cb8-16" title="16"><span class="co"># Fill missing values</span></a>
+<a class="sourceLine" id="cb8-17" title="17">filled_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/fill_missing.html">fill_missing</a></span>(X_train, X_test, col_list, <span class="dt">num_imp =</span> <span class="st">'mean'</span>, <span class="dt">cat_imp =</span> <span class="st">'mode'</span>)</a>
+<a class="sourceLine" id="cb8-18" title="18">X_train_filled &lt;-<span class="st"> </span>filled_list<span class="op">$</span>x_train</a>
+<a class="sourceLine" id="cb8-19" title="19">X_test_filled &lt;-<span class="st"> </span>filled_list<span class="op">$</span>x_test</a>
+<a class="sourceLine" id="cb8-20" title="20"></a>
+<a class="sourceLine" id="cb8-21" title="21"><span class="co"># Transform data</span></a>
+<a class="sourceLine" id="cb8-22" title="22">transformed_list &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/column_transformer.html">column_transformer</a></span>(X_train_filled, X_test_filled, col_list)</a>
+<a class="sourceLine" id="cb8-23" title="23">X_train_transformed &lt;-transformed_list<span class="op">$</span>x_train</a>
+<a class="sourceLine" id="cb8-24" title="24">X_test_transformed &lt;-<span class="st"> </span>transformed_list<span class="op">$</span>x_test</a>
+<a class="sourceLine" id="cb8-25" title="25"></a>
+<a class="sourceLine" id="cb8-26" title="26"><span class="co"># Select top 2 features</span></a>
+<a class="sourceLine" id="cb8-27" title="27">cols &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/laundRy/man/feature_selection.html">feature_selection</a></span>(X_train_transformed, y_train, <span class="dt">n_features =</span> <span class="dv">2</span>, <span class="dt">mode =</span> <span class="st">'regression'</span>)</a>
+<a class="sourceLine" id="cb8-28" title="28"></a>
+<a class="sourceLine" id="cb8-29" title="29">X_train &lt;-<span class="st"> </span>X_train_transformed[cols]</a>
+<a class="sourceLine" id="cb8-30" title="30">X_test &lt;-<span class="st"> </span>X_test_transformed[cols]</a>
+<a class="sourceLine" id="cb8-31" title="31"></a>
+<a class="sourceLine" id="cb8-32" title="32">X_train</a>
+<a class="sourceLine" id="cb8-33" title="33"><span class="co">#&gt;    a.3 a.2</span></a>
+<a class="sourceLine" id="cb8-34" title="34"><span class="co">#&gt; 1    0   0</span></a>
+<a class="sourceLine" id="cb8-35" title="35"><span class="co">#&gt; 2    0   1</span></a>
+<a class="sourceLine" id="cb8-36" title="36"><span class="co">#&gt; 3    0   0</span></a>
+<a class="sourceLine" id="cb8-37" title="37"><span class="co">#&gt; 4    0   0</span></a>
+<a class="sourceLine" id="cb8-38" title="38"><span class="co">#&gt; 5    0   0</span></a>
+<a class="sourceLine" id="cb8-39" title="39"><span class="co">#&gt; 6    0   0</span></a>
+<a class="sourceLine" id="cb8-40" title="40"><span class="co">#&gt; 7    0   1</span></a>
+<a class="sourceLine" id="cb8-41" title="41"><span class="co">#&gt; 8    1   0</span></a>
+<a class="sourceLine" id="cb8-42" title="42"><span class="co">#&gt; 9    0   0</span></a>
+<a class="sourceLine" id="cb8-43" title="43"><span class="co">#&gt; 10   0   0</span></a>
+<a class="sourceLine" id="cb8-44" title="44"></a>
+<a class="sourceLine" id="cb8-45" title="45">X_test</a>
+<a class="sourceLine" id="cb8-46" title="46"><span class="co">#&gt;   a.3 a.2</span></a>
+<a class="sourceLine" id="cb8-47" title="47"><span class="co">#&gt; 1   1   0</span></a>
+<a class="sourceLine" id="cb8-48" title="48"><span class="co">#&gt; 2   0   0</span></a>
+<a class="sourceLine" id="cb8-49" title="49"><span class="co">#&gt; 3   0   1</span></a></code></pre></div>
 </div>
 </div>
   </div>

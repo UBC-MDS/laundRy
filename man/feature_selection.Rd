@@ -13,10 +13,10 @@ feature_selection(X, y, mode, n_features)
 
 \item{mode}{string regression or classification}
 
-\item{n_features}{int}
+\item{n_features}{int number of top important features select from all the features}
 }
 \value{
-list
+vector of feature nams of top n_features
 }
 \description{
 Take input as predictons and response and return the
@@ -24,4 +24,5 @@ list of features that are important
 }
 \examples{
 feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)
+feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), factor(c(1, 1, 0)), "classification", 1)
 }
