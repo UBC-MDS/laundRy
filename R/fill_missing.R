@@ -11,13 +11,11 @@ getmode <- function(v) {
 #' Replace missing values in dataframe columns by the specified methods.
 #' Separate methods can be applied for categorical column imputation and
 #' numerical column imputation.
-#' Categorical column values must be encoded with integers not with characters.
 #'
 #' @param x_train training set dataframe to be transformed
 #' @param x_test test set dataframe to be transformed
 #' @param column_list named list of columns with two character vectors, must be
-#' named numeric' and 'categorical'. Categorical column values must
-#'  be encoded with integers not with characters.
+#' named numeric' and 'categorical'.
 #' @param num_imp method for numerical imputation, options are "mean and" median
 #' @param cat_imp method for categorical imputation, only option is "mode"
 #'
@@ -60,10 +58,6 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
     }
   }
 
-  # Check that all columns have numeric data
-  if (!dim(x_train)[2]==dim(dplyr::select_if(x_train, is.numeric))[2])
-      stop("Columns must have numeric data, encode categorical variables as integers")
-
   # Check that numerical imputation method is one of the two options
   if (num_imp != "mean" && num_imp != "median")
     stop("numerical imputation method can only be mean or median")
@@ -71,6 +65,13 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
   # Check categorical imputation method is one of the two options
   if (cat_imp != "mode")
     stop("categorical imputation method can only be mode")
+
+  # Convert factor columns to character columns
+  x_train %>%
+    dplyr::mutate_if(is.factor, as.character) -> x_train
+
+  x_test %>%
+    dplyr::mutate_if(is.factor, as.character) -> x_test
 
   # Imputation methods for numerical columns
   for (column in column_list$"numeric"){
@@ -108,7 +109,8 @@ fill_missing <- function(x_train, x_test, column_list, num_imp, cat_imp)
   # Imputation methods for categorical columns
   for (column in column_list$"categorical"){
     train_col_mode <- x_train %>% dplyr::select(column) %>%
-                      dplyr::pull() %>% getmode()
+      dplyr::pull() %>%  getmode()
+
     # impute training mode to train column
     x_train <- x_train %>%
       dplyr::mutate(!!column := ifelse(is.na(!!rlang::sym(column)),

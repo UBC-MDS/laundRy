@@ -50,6 +50,19 @@ test_that("Test set categorical imputation accurate", {
   expect_equal(test_out$y[2], 2)
 })
 
+test_that("Train set categorical imputation accurate with char vecs", {
+  output <- fill_missing(df_tr_c, df_te_c, list_input, "median", "mode")
+  train_out <- output$x_train
+  expect_equal(train_out$y[3], "a")
+})
+
+test_that("Test set categorical imputation accurate with char vecs", {
+  output <- fill_missing(df_tr_c, df_te_c, list_input, "median", "mode")
+  test_out <- output$x_test
+  expect_equal(test_out$y[2], "a")
+})
+
+
 test_that("Invalid input gives error", {
   expect_error(fill_missing(c(4,3,3), df_te, list_input, "median", "mode"), "Training set must be a dataframe.")
   expect_error(fill_missing(df_tr,c(4,3,3), list_input, "median", "mode"), "Test set must be a dataframe.")
@@ -60,5 +73,5 @@ test_that("Invalid input gives error", {
   expect_error(fill_missing(df_tr, df_te, list_input, "median", "median"), "categorical imputation method can only be mode")
   expect_error(fill_missing(df_tr, df_te, list_input_2, "median", "mode"), "Columns in named list must be in dataframe")
   expect_error(fill_missing(df_tr_2, df_te_2, list_input_2, "median", "mode"), "Columns of train and test set must be identical.")
-  expect_error(fill_missing(df_tr_3, df_te, list_input, "median", "mode"), "Columns must have numeric data, encode categorical variables as integers")
+ # expect_error(fill_missing(df_tr_3, df_te, list_input, "median", "mode"), "Columns must have numeric data, encode categorical variables as integers")
 })
