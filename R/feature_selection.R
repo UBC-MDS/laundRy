@@ -8,9 +8,9 @@
 #' @param X data.frame of predictors
 #' @param y vector of response and should be a factor in case of classification
 #' @param mode string regression or classification
-#' @param n_features int
+#' @param n_features int number of top important features select from all the features
 #'
-#' @return vector
+#' @return vector of feature nams of top n_features
 #' @export
 #' @examples
 #' feature_selection(data.frame(X1 = c(2, 4, 3), X2 = c(8, 7, 4)), c(4, 3, 5), "regression", 2)

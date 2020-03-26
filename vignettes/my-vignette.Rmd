@@ -130,6 +130,7 @@ $x_test
 #### feature_selection()
 
 >Finally, you have your filled and transformed training and testing datasets. Your test set contains more features than you'd like to use, since you know that some features are better predictors than others. You can use `feature_selection()` to obtain a specified number of the most important features, which you can then use to subset your feature datasets before passing them into a machine learning algorithm.
+The method used for feature selection  
 
 ```R
 df <- data.frame(a = c(1, 2, 3),
